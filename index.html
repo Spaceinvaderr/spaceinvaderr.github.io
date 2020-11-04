@@ -24,7 +24,7 @@
         imgElement.src = URL.createObjectURL(e.target.files[0]);
     }, false);
     imgElement.onload = function() {
-        let mat = cv.imread(imgElement);
+        let mat = cv.calcHist(imgElement);
         cv.imshow('canvasOutput', mat);
         mat.delete();
     };
