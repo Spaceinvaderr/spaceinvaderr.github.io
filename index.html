@@ -20,19 +20,12 @@
 <script type="text/javascript">
     let imgElement = document.getElementById('imageSrc');
     let inputElement = document.getElementById('fileInput');
-    let channels = [0];
-    let histSize = [256];
-    let ranges = [0, 255];
-    let hist = new cv.Mat();
-    let mask = new cv.Mat();
-    let color = new cv.Scalar(255, 255, 255);
-    let scale = 2;
     inputElement.addEventListener('change', (e) => {
         imgElement.src = URL.createObjectURL(e.target.files[0]);
     }, false);
     imgElement.onload = function() {
         let mat = cv.imread(imgElement);
-        cv.calcHist('canvasOutput', mat);
+        cv.imshow('canvasOutput', mat);
         mat.delete();
     };
     function onOpenCvReady() {
