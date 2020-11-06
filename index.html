@@ -49,9 +49,23 @@
             let point2 = new cv.Point((i + 1) * scale - 1, src.rows - binVal);
             cv.rectangle(dst, point1, point2, color, cv.FILLED);
         }
+
+        let imgCount = 1;
+        let dims = 3;
+        const sizes = [256,256,256];
+        const channels = [0,1,2];
+        let rRange = [0,256];
+        let gRange = [0,256];
+        let bRange = [0,256];
+        const ranges = [rRange,gRange,bRange];
+        let mask1 = new cv.Mat();
+        cv.calcHist(src, imgCount, channels, mask, hist, dims, sizes, ranges);
+
         cv.imshow('canvasOutput', dst);
         src.delete(); dst.delete(); srcVec.delete(); mask.delete(); hist.delete();
     };
+    
+    let check = cv.imwrite(imgElement)
     function onOpenCvReady() {
         document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
     }
