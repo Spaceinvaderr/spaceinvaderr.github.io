@@ -24,9 +24,7 @@
         imgElement.src = URL.createObjectURL(e.target.files[0]);
     }, false);
     imgElement.onload = function() {
-        let mat = cv.imread(imgElement);
-        //cv.imshow('canvasOutput', mat);
-        let src = cv.imread(mat);
+        let src = cv.imread(imgElement);
         cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY, 0);
         let srcVec = new cv.MatVector();
         srcVec.push_back(src);
@@ -53,7 +51,6 @@
         }
         cv.imshow('canvasOutput', dst);
         src.delete(); dst.delete(); srcVec.delete(); mask.delete(); hist.delete();
-        mat.delete();
     };
     function onOpenCvReady() {
         document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
