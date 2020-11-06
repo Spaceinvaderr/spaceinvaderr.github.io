@@ -52,12 +52,12 @@
 
         let imgCount = 1;
         let dims = 3;
-        const sizes = [256,256,256];
-        const channels = [0,1,2];
+        let sizes = [256,256,256];
+        let channels = [0,1,2];
         let rRange = [0,256];
         let gRange = [0,256];
         let bRange = [0,256];
-        const ranges = [rRange,gRange,bRange];
+        let ranges = [rRange,gRange,bRange];
         let mask1 = new cv.Mat();
         cv.calcHist(src, imgCount, channels, mask, hist, dims, sizes, ranges);
 
