@@ -29,7 +29,7 @@
         let srcVec = new cv.MatVector();
         srcVec.push_back(src);
         let accumulate = false;
-        let channels = [0];
+        let channels = [0,1,2,3];
         let histSize = [256];
         let ranges = [0, 255];
         let hist = new cv.Mat();    
@@ -53,7 +53,6 @@
         let imgCount = 1;
         let dims = 3;
         let sizes = [256,256,256];
-        let channels = [0,1,2];
         let rRange = [0,256];
         let gRange = [0,256];
         let bRange = [0,256];
