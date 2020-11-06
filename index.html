@@ -43,7 +43,7 @@
         let rRange = [0,256];
         let gRange = [0,256];
         let bRange = [0,256];
-        let bwRange = [0, 255]
+        let bwRange = [0,256];
         let ranges = [bwRange,rRange,gRange,bRange];
         cv.calcHist(srcVec, channels, mask, hist, sizes, ranges, accumulate);
         let result = cv.minMaxLoc(hist, mask);
