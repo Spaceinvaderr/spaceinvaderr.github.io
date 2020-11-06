@@ -31,7 +31,6 @@
         let accumulate = false;
         let channels = [0,1,2,3];
         let histSize = [256];
-        let ranges = [0, 255];
         let hist = new cv.Mat();    
         let mask = new cv.Mat();
         let color = new cv.Scalar(255, 255, 255);
@@ -52,12 +51,12 @@
 
         let imgCount = 1;
         let dims = 3;
-        let sizes = [256,256,256];
+        let sizes = [256,256,256,256];
         let rRange = [0,256];
         let gRange = [0,256];
         let bRange = [0,256];
-        let ranges = [rRange,gRange,bRange];
-        let mask1 = new cv.Mat();
+        let bwRange = [0, 255]
+        let ranges = [bwRange, rRange,gRange,bRange];
         cv.calcHist(src, imgCount, channels, mask, hist, dims, sizes, ranges);
 
         cv.imshow('canvasOutput', dst);
