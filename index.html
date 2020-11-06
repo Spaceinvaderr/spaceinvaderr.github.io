@@ -26,7 +26,7 @@
     imgElement.onload = function() {
         let mat = cv.imread(imgElement);
         //cv.imshow('canvasOutput', mat);
-        let src = cv.imread('canvasOutput');
+        let src = cv.imread(mat);
         cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY, 0);
         let srcVec = new cv.MatVector();
         srcVec.push_back(src);
