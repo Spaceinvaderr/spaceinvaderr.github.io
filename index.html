@@ -40,10 +40,10 @@
         let imgCount = 1;
         let dims = 3;
         let sizes = [256,256,256];
-        let rRange = [0,256];
-        let gRange = [0,256];
-        let bRange = [0,256];
-        let bwRange = [0,256];
+        let rRange = [0,255];
+        let gRange = [0,255];
+        let bRange = [0,255];
+        let bwRange = [0,255];
         let ranges = [rRange,gRange,bRange];
         cv.calcHist(srcVec, channels, mask, hist, sizes, ranges, accumulate);
         let result = cv.minMaxLoc(hist, mask);
