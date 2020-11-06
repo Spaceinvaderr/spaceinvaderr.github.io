@@ -44,8 +44,8 @@
         let gRange = [0,256];
         let bRange = [0,256];
         let bwRange = [0, 255]
-        let ranges = [bwRange, rRange,gRange,bRange];
-        cv.calcHist(src, imgCount, channels, mask, hist, dims, sizes, ranges, accumulate);
+        let ranges = [bwRange,rRange,gRange,bRange];
+        cv.calcHist(srcVec, imgCount, channels, mask, hist, dims, sizes, ranges, accumulate);
         let result = cv.minMaxLoc(hist, mask);
         let max = result.maxVal;
         let dst = new cv.Mat.zeros(src.rows, histSize[0] * scale,
@@ -58,13 +58,11 @@
             cv.rectangle(dst, point1, point2, color, cv.FILLED);
         }
 
-        
-
         cv.imshow('canvasOutput', dst);
         src.delete(); dst.delete(); srcVec.delete(); mask.delete(); hist.delete();
     };
     
-    let check = cv.imwrite(imgElement)
+    //let check = cv.imwrite(imgElement)
     function onOpenCvReady() {
         document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
     }
