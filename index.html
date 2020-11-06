@@ -25,7 +25,7 @@
     }, false);
     imgElement.onload = function() {
         let mat = cv.imread(imgElement);
-        cv.imshow('canvasOutput', mat);
+        //cv.imshow('canvasOutput', mat);
         mat.delete();
     };
     function onOpenCvReady() {
