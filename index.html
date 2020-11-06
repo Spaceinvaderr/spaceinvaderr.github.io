@@ -30,13 +30,22 @@
         srcVec.push_back(src);
         let accumulate = false;
         let channels = [0,1,2,3];
-        let histSize = [256];
+        //let histSize = [256];
         let hist = new cv.Mat();    
         let mask = new cv.Mat();
         let color = new cv.Scalar(255, 255, 255);
         let scale = 2;
         // You can try more different parameters
-        cv.calcHist(srcVec, channels, mask, hist, histSize, ranges, accumulate);
+        //cv.calcHist(srcVec, channels, mask, hist, histSize, ranges, accumulate);
+        let imgCount = 1;
+        let dims = 3;
+        let sizes = [256,256,256,256];
+        let rRange = [0,256];
+        let gRange = [0,256];
+        let bRange = [0,256];
+        let bwRange = [0, 255]
+        let ranges = [bwRange, rRange,gRange,bRange];
+        cv.calcHist(src, imgCount, channels, mask, hist, dims, sizes, ranges, accumulate);
         let result = cv.minMaxLoc(hist, mask);
         let max = result.maxVal;
         let dst = new cv.Mat.zeros(src.rows, histSize[0] * scale,
@@ -49,15 +58,7 @@
             cv.rectangle(dst, point1, point2, color, cv.FILLED);
         }
 
-        let imgCount = 1;
-        let dims = 3;
-        let sizes = [256,256,256,256];
-        let rRange = [0,256];
-        let gRange = [0,256];
-        let bRange = [0,256];
-        let bwRange = [0, 255]
-        let ranges = [bwRange, rRange,gRange,bRange];
-        cv.calcHist(src, imgCount, channels, mask, hist, dims, sizes, ranges);
+        
 
         cv.imshow('canvasOutput', dst);
         src.delete(); dst.delete(); srcVec.delete(); mask.delete(); hist.delete();
