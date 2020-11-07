@@ -38,12 +38,12 @@
         let ranges = [0, 255];
         let result = cv.minMaxLoc(hist, mask);
         let max = result.maxVal;
-        let dst = new cv.Mat.zeros(src.rows, histSize[0] * scale,cv.CV_8UC3);
+        let dst = new cv.Mat();
         
         cv.split(src, srcVec);
         let rChannel = srcVec.get(0);
-        cv.cvtColor(src, src, cv.COLOR_RGB2RGBA, 0);
-        srcVec.push_back(src);
+        cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY, 0);
+       // srcVec.push_back(src);
         cv.calcHist(rChannel, channels, mask, hist, histSize, ranges, accumulate);
         // draw histogram
         for (let i = 0; i < histSize[0]; i++) {
@@ -63,6 +63,6 @@
     }
 </script>
 <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
-<p>ver 1.0.7</p>
+<p>ver 1.0.8</p>
 </body>
 </html>
