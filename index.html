@@ -42,7 +42,7 @@
         
         cv.split(src, srcVec);
         let rChannel = srcVec.get(0);
-        cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY, 0);
+        cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY, 0);
        // srcVec.push_back(src);
         cv.calcHist(rChannel, channels, mask, hist, histSize, ranges, accumulate);
         // draw histogram
@@ -54,7 +54,7 @@
         }
 
         cv.imshow('canvasOutput', dst);
-        src.delete(); dst.delete(); srcVec.delete(); mask.delete(); hist.delete();
+        src.delete(); dst.delete(); srcVec.delete(); mask.delete(); hist.delete(); rChannel.delete();
     };
     
     //let check = cv.imwrite(imgElement)
@@ -63,6 +63,6 @@
     }
 </script>
 <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
-<p>ver 1.0.8</p>
+<p>ver 1.0.9</p>
 </body>
 </html>
