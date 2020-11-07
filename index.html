@@ -40,10 +40,10 @@
         let imgCount = 1;
         let dims = 3;
         let sizes = [256,256,256];
-        let rRange = [0,255];
-        let gRange = [0,255];
-        let bRange = [0,255];
-        let bwRange = [0,255];
+        let rRange = [0, 255];
+        let gRange = [0, 255];
+        let bRange = [0, 255];
+        let bwRange = [0, 255];
         let ranges = [rRange,gRange,bRange];
         cv.calcHist(srcVec, channels, mask, hist, sizes, ranges, accumulate);
         let result = cv.minMaxLoc(hist, mask);
@@ -68,6 +68,6 @@
     }
 </script>
 <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
-<p>ver 1.0.1</p>
+<p>ver 1.0.2</p>
 </body>
 </html>
