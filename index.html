@@ -27,23 +27,21 @@
         let src = cv.imread(imgElement); 
         let srcVec = new cv.MatVector();
         let accumulate = false;
-        let channels = [0,1,2];
+        let channels = [0];
         let histSize = [256];
         let hist = new cv.Mat();    
         let mask = new cv.Mat();
         let color = new cv.Scalar(255, 255, 255);
         let scale = 2;
-        // You can try more different parameters
-        //cv.calcHist(srcVec, channels, mask, hist, histSize, ranges, accumulate);
         let ranges = [0, 255];
         let result = cv.minMaxLoc(hist, mask);
         let max = result.maxVal;
         let dst = new cv.Mat();
         
-        cv.split(src, srcVec);
-        let rChannel = srcVec.get(0);
+        //cv.split(src, srcVec);
+        //let rChannel = srcVec.get(0);
         cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY, 0);
-       // srcVec.push_back(src);
+        srcVec.push_back(src);
         cv.calcHist(srcVec, channels, mask, hist, histSize, ranges, accumulate);
         // draw histogram
         for (let i = 0; i < histSize[0]; i++) {
@@ -63,6 +61,6 @@
     }
 </script>
 <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
-<p>ver 1.1.0</p>
+<p>ver 1.1.1</p>
 </body>
 </html>
