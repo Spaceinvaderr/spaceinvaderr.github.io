@@ -44,7 +44,7 @@
         let rChannel = srcVec.get(0);
         cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY, 0);
        // srcVec.push_back(src);
-        cv.calcHist(rChannel, channels, mask, hist, histSize, ranges, accumulate);
+        cv.calcHist(srcVec, channels, mask, hist, histSize, ranges, accumulate);
         // draw histogram
         for (let i = 0; i < histSize[0]; i++) {
             let binVal = hist.data32F[i] * src.rows / max;
@@ -63,6 +63,6 @@
     }
 </script>
 <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
-<p>ver 1.0.9</p>
+<p>ver 1.1.0</p>
 </body>
 </html>
