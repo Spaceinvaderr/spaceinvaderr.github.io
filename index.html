@@ -35,20 +35,15 @@
         let scale = 2;
         // You can try more different parameters
         //cv.calcHist(srcVec, channels, mask, hist, histSize, ranges, accumulate);
-        let imgCount = 1;
-        let dims = 3;
-        let rRange = [0, 255];
-        let gRange = [0, 255];
-        let bRange = [0, 255];
-        let bwRange = [0, 255]
         let ranges = [0, 255];
         let result = cv.minMaxLoc(hist, mask);
         let max = result.maxVal;
         let dst = new cv.Mat.zeros(src.rows, histSize[0] * scale,cv.CV_8UC3);
-        src.convertTo(dst, cv.CV_8U, scale, shift)
+        let rChannel = srcVec.get(0);
+        cv.split(src, srcVec);
         cv.cvtColor(src, src, cv.COLOR_RGB2RGBA, 0);
         srcVec.push_back(src);
-        cv.calcHist(srcVec, channels, mask, hist, histSize, ranges, accumulate);
+        cv.calcHist(srcVec[0], channels, mask, hist, histSize, ranges, accumulate);
         // draw histogram
         for (let i = 0; i < histSize[0]; i++) {
             let binVal = hist.data32F[i] * src.rows / max;
@@ -67,6 +62,6 @@
     }
 </script>
 <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
-<p>ver 1.0.5</p>
+<p>ver 1.0.6</p>
 </body>
 </html>
