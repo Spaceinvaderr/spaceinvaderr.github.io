@@ -36,7 +36,7 @@
         let ranges = [0, 255];
         let result = cv.minMaxLoc(hist, mask);
         let max = result.maxVal;
-        let dst = new cv.Mat();
+        let dst = new cv.Mat.zeros(src.rows, histSize[0] * scale,cv.CV_8UC3);
         
         //cv.split(src, srcVec);
         //let rChannel = srcVec.get(0);
@@ -61,6 +61,6 @@
     }
 </script>
 <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
-<p>ver 1.1.1</p>
+<p>ver 1.1.2</p>
 </body>
 </html>
