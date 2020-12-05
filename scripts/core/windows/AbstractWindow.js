@@ -120,7 +120,6 @@
         var BUTTONS_MARGIN = 10;
 
         this.$title.innerText = name;
-        this.$title.classList.add('sky-hide');
 
         // As quickly as engine can render.
         setTimeout(function () {
@@ -130,7 +129,6 @@
                 self.$title.style.width = (diff - DOTS_WIDTH) + 'px';
             }
 
-            self.$title.classList.remove('sky-hide');
         }, 0);
     };
 
