@@ -1,0 +1,116 @@
+.abstract-window {
+    -webkit-user-drag: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    z-index: 10;
+}
+
+.abstract-window.active {
+    z-index: 20;
+}
+
+.abstract-window .abstract-window-bar {
+    cursor: pointer;
+    height: 11px;
+    padding: 5px;
+    background: #e8e8e8;
+    border: 1px solid #999999;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: none;
+    overflow: hidden;
+}
+
+.abstract-window.active  .abstract-window-bar {
+    background: linear-gradient(180deg, #e8e8e8, #b6b5b6);
+}
+
+.abstract-window .abstract-window-bar .abstract-window-title {
+    padding: 0;
+    margin: 0;
+    font-size: 11px;
+    color: #b6b6b6;
+    float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    /* Disable text selecting */
+    pointer-events: none;
+    -webkit-user-select: none;
+}
+
+.abstract-window.active .abstract-window-bar .abstract-window-title {
+    color: #383838;
+}
+
+body.macosx .abstract-window .abstract-window-bar .abstract-window-title {
+    float: right;
+}
+
+.abstract-window .abstract-window-bar .abstract-window-buttons {
+    float: right;
+}
+
+body.macosx .abstract-window .abstract-window-bar .abstract-window-buttons {
+    float: left;
+}
+
+.abstract-window .abstract-window-bar .abstract-window-buttons .abstract-window-button {
+    display: inline-block;
+    font-family: monospace, serif;
+    float: right;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+}
+
+.abstract-window .abstract-window-bar .abstract-window-buttons .abstract-window-button:first-child {
+    margin-right: 0;
+}
+
+.abstract-window .abstract-window-bar .abstract-window-buttons .abstract-window-button:last-child {
+    margin-left: 3px;
+}
+
+.abstract-window .abstract-window-bar .abstract-window-buttons .abstract-window-button.abstract-window-button-close {
+    background: url("../../../images/icons.png") no-repeat -12px 0;
+}
+
+.abstract-window .abstract-window-bar .abstract-window-buttons .abstract-window-button.abstract-window-button-min {
+    background: url("../../../images/icons.png") no-repeat -60px 0;
+}
+
+.abstract-window .abstract-window-bar .abstract-window-buttons .abstract-window-button.abstract-window-button-max {
+    background: url("../../../images/icons.png") no-repeat -36px 0;
+}
+
+.abstract-window .abstract-window-bar .abstract-window-buttons:hover .abstract-window-button.abstract-window-button-close {
+    background: url("../../../images/icons.png") no-repeat 0 0;
+}
+
+.abstract-window .abstract-window-bar .abstract-window-buttons:hover .abstract-window-button.abstract-window-button-min {
+    background: url("../../../images/icons.png") no-repeat -48px 0;
+}
+
+.abstract-window .abstract-window-bar .abstract-window-buttons:hover .abstract-window-button.abstract-window-button-max {
+    background: url("../../../images/icons.png") no-repeat -24px 0;
+}
+
+.abstract-window .abstract-window-content {
+    padding: 5px;
+    overflow: hidden;
+    background: #e7e6e7;
+    border: 1px solid #999999;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -webkit-user-select: none;
+    font-size: 12px;
+}
+
+.abstract-window canvas {
+    background: url('../../../images/bg-transparent.jpg') repeat 0 0;
+}
