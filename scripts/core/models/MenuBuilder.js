@@ -692,7 +692,7 @@
         this.addSeparator(helpMenu);
 
         this.aboutHelpMenuItem = this.addMenuItem(root.Locale.get('ABOUT_HELP'), function () {
-            var pdf = path.resolve('app', 'docs', 'help.pdf');
+            var pdf = "";//path.resolve('app', 'docs', 'help.pdf');
             gui.Shell.openItem(pdf);
         }, 'Ctrl-Shift', 'P');
         helpMenu.append(this.aboutHelpMenuItem);
