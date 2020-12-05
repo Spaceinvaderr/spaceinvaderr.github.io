@@ -2,65 +2,393 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Image editor</title>
+    <title>APO</title>
+    <link rel="stylesheet" href="styles/core/default.css"/>
 </head>
 <body>
-<h2>Image histogram</h2>
-<p id="status">Upload the image you want to process</p>
-<div>
-  <div class="inputoutput">
-    <img id="imageSrc" alt="No Image" />
-    <div class="caption">imageSrc <input type="file" id="fileInput" name="file" /></div>
-  </div>
-  <div class="inputoutput">
-    <canvas id="canvasOutput" ></canvas>
-    <div class="caption">canvasOutput</div>
-  </div>
-</div>
-<script type="text/javascript">
-    let imgElement = document.getElementById('imageSrc');
-    let inputElement = document.getElementById('fileInput');
-    inputElement.addEventListener('change', (e) => {
-        imgElement.src = URL.createObjectURL(e.target.files[0]);
-    }, false);
-    imgElement.onload = function() {
-        let src = cv.imread(imgElement); 
-        let srcVec = new cv.MatVector();
-        let accumulate = false;
-        let channels = [0];
-        let histSize = [256];
-        let hist = new cv.Mat();    
-        let mask = new cv.Mat();
-        let color = new cv.Scalar(255, 255, 255);
-        let scale = 2;
-        let ranges = [0, 255];
-        let result = cv.minMaxLoc(hist, mask);
-        let max = result.maxVal;
-        let dst = new cv.Mat.zeros(src.rows, histSize[0] * scale,cv.CV_8UC3);
-        
-        //cv.split(src, srcVec);
-        //let rChannel = srcVec.get(0);
-        cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY, 0);
-        srcVec.push_back(src);
-        cv.calcHist(srcVec, channels, mask, hist, histSize, ranges, accumulate);
-        // draw histogram
-        for (let i = 0; i < histSize[0]; i++) {
-            let binVal = hist.data32F[i] * src.rows / max;
-            let point1 = new cv.Point(i * scale, src.rows - 1);
-            let point2 = new cv.Point((i + 1) * scale - 1, src.rows - binVal);
-            cv.rectangle(dst, point1, point2, color, cv.FILLED);
-        }
+    <div id="app"></div>
 
-        cv.imshow('canvasOutput', dst);
-        src.delete(); dst.delete(); srcVec.delete(); mask.delete(); hist.delete(); rChannel.delete();
-    };
-    
-    //let check = cv.imwrite(imgElement)
-    function onOpenCvReady() {
-        document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
-    }
-</script>
-<script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
-<p>ver 1.1.3</p>
+    <div id="status" class="hidden"></div>
+
+    <div class="sky-hide">
+
+        <!-- windows/special -->
+
+        <script type="text/html" id="template-color-palette-special">
+            <div class="color-palette-content">
+                <div class="color-palette-chooser">
+                    <label>Wybierz paletę: <br />
+                        <select>
+                            <option value="colorwheel1.png" selected="selected">Paleta 1</option>
+                            <option value="colorwheel2.png">Paleta 2</option>
+                            <option value="colorwheel3.png">Paleta 3</option>
+                            <option value="colorwheel4.png">Paleta 4</option>
+                            <option value="colorwheel5.png">Paleta 5</option>
+                        </select>
+                    </label>
+                </div>
+                <fieldset>
+                    <label><span>R:</span> <input type="text" class="color-palette-r"></label>
+                    <label><span>G:</span> <input type="text" class="color-palette-g"></label>
+                    <label><span>B:</span> <input type="text" class="color-palette-b"></label>
+                    <label><span>A:</span> <input type="text" class="color-palette-a"></label>
+
+                    <span class="color-palette-ch"></span>
+                    <span class="color-palette-cs"></span>
+                </fieldset>
+            </div>
+        </script>
+
+        <!-- windows/static -->
+
+        <script type="text/html" id="template-lut-static">
+            <table class="lut-static-content" cellpadding="0" cellspacing="0" border="1">
+                <thead>
+                    <tr>
+                        <% _.each(original, function (item, index) { %>
+                            <% if (item !== undefined) { %>
+                                <th style="background: rgb(<%= index %>, <%= index %>, <%= index %>);">
+                                    <% var color = (index < 128) ? 255 : 0; %>
+                                    <span style="color: rgb(<%= color %>, <%= color %>, <%= color %>);">#<%= index %></span>
+                                </th>
+                            <% } %>
+                        <% }); %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <% _.each(original, function (item) { %>
+                            <% if (item !== undefined) { %>
+                                <td><%= item %></td>
+                            <% } %>
+                        <% }); %>
+                    </tr>
+                    <tr class="bg-white">
+                        <% _.each(current, function (item) { %>
+                            <% if (item !== undefined) { %>
+                                <td><%= item %></td>
+                            <% } %>
+                        <% }); %>
+                    </tr>
+                </tbody>
+            </table>
+        </script>
+
+        <script type="text/html" id="template-uop-static">
+            <table class="uop-static-content" cellpadding="0" cellspacing="0" border="1">
+                <thead>
+                    <tr>
+                        <% _.each(pixels, function (item, index) { %>
+                            <% if (item !== undefined) { %>
+                                <th>
+                                    <span>[<%= item %>]</span>
+                                </th>
+                            <% } %>
+                        <% }); %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <% _.each(pixels, function (item, index) { %>
+                            <% if (item !== undefined) { %>
+                                <% var color = (index < 128) ? 255 : 0; %>
+                                <td style="background: rgb(<%= index %>, <%= index %>, <%= index %>); color: rgb(<%= color %>, <%= color %>, <%= color %>);">
+                                    <span>#<%= index %></span>
+                                </td>
+                            <% } %>
+                        <% }); %>
+                    </tr>
+                    <tr class="bg-white">
+                        <% _.each(pixels, function (item, index) { %>
+                            <% if (item !== undefined) { %>
+                                <% var color = (index < 128) ? 255 : 0; %>
+                                <td style="background: rgb(<%= index %>, <%= index %>, <%= index %>); color: rgb(<%= color %>, <%= color %>, <%= color %>);">
+                                    #<input value="<%= index %>" type="number" min="0" max="255">
+                                </td>
+                            <% } %>
+                        <% }); %>
+                    </tr>
+                </tbody>
+            </table>
+        </script>
+
+        <!-- windows/tools -->
+
+        <script type="text/html" id="template-arithmetical-logical-tool">
+            <dl>
+                <dt>Wybierz <strong>pierwszy</strong> obraz:</dt>
+                <dd>
+                    <select class="arithmetical-logical-tool-first"></select>
+                </dd>
+
+                <dt>Wybierz <strong>drugi</strong> obraz:</dt>
+                <dd>
+                    <select class="arithmetical-logical-tool-second"></select>
+                </dd>
+
+                <dt>Wybierz operację:</dt>
+                <dd>
+                    <select class="arithmetical-logical-tool-operations" disabled="disabled">
+                        <option>---</option>
+                        <optgroup label="Arytmetyczne">
+                            <option value="add">Dodawanie (ADD)</option>
+                            <option value="sub">Odejmowanie (SUB)</option>
+                            <option value="mul">Mnożenie (MUL)</option>
+                        </optgroup>
+                        <optgroup label="Logiczne">
+                            <option value="or">OR</option>
+                            <option value="and">AND</option>
+                            <option value="xor">XOR</option>
+                        </optgroup>
+                    </select>
+                </dd>
+            </dl>
+        </script>
+
+        <script type="text/html" id="template-brightness-regulation-tool">
+            <div class="brightness-regulation-tool-content">
+                <span>Jasność:</span>
+                <input class="brightness-regulation-tool-regulation-value" type="text" maxlength="4">
+                <input class="brightness-regulation-tool-regulation-range" type="range" min="-100" max="200">
+            </div>
+        </script>
+
+        <script type="text/html" id="template-choose-color-turtle-algorithm-tool">
+            <div class="choose-color-turtle-algorithm-tool-content">
+                <label>Wybierz kolor:</label>
+                <input type="color" />
+                <button class="choose-color-turtle-algorithm-tool-apply">Zastosuj</button>
+            </div>
+        </script>
+
+        <script type="text/html" id="template-contrast-regulation-tool">
+            <div class="contrast-regulation-tool-content">
+                <span>Kontrast:</span>
+                <input class="contrast-regulation-tool-regulation-value" type="text" maxlength="3">
+                <input class="contrast-regulation-tool-regulation-range" type="range" min="-50" max="100">
+            </div>
+        </script>
+
+        <script type="text/html" id="template-gamma-regulation-tool">
+            <div class="gamma-regulation-tool-content">
+                <span>Korekcja Gamma:</span>
+                <input class="gamma-regulation-tool-regulation-value" type="text" maxlength="2">
+                <input class="gamma-regulation-tool-regulation-range" type="range" min="1" max="50">
+            </div>
+        </script>
+
+        <script type="text/html" id="template-morphological-tool">
+            <div class="morphological-tool-content">
+                <fieldset>
+                    <ul>
+                        <li><label><input type="radio" name="morphological-tool-figure" value="diamond"> Romb (4-spójny)</label></li>
+                        <li><label><input type="radio" name="morphological-tool-figure" value="square"> Kwadrat (8-spójny)</label></li>
+                    </ul>
+                </fieldset>
+
+                <fieldset>
+                    <ul>
+                        <li class="left"><button class="morphological-tool-type" data-type="erode">Erozja</button></li>
+                        <li class="right"><button class="morphological-tool-type" data-type="open">Otwarcie</button></li>
+                        <li class="left"><button class="morphological-tool-type" data-type="dilate">Dylatacja</button></li>
+                        <li class="right"><button class="morphological-tool-type" data-type="close">Zamknięcie</button></li>
+                    </ul>
+                </fieldset>
+
+                <button class="morphological-tool-reset">Reset</button>
+            </div>
+        </script>
+
+        <script type="text/html" id="template-posterize-tool">
+            <div class="posterize-tool-content">
+                <span>Poziomy:</span>
+                <input class="posterize-tool-regulation-value" type="text" maxlength="3">
+                <input class="posterize-tool-regulation-range" type="range" min="2" max="256">
+            </div>
+        </script>
+
+        <script type="text/html" id="template-sharpen-tool">
+            <div class="sharpen-tool-options">
+                <label>Filtracja:</label>
+                <select>
+                    <option value="">--wybierz--</option>
+                    <option value="med">Medianowa</option>
+                    <option value="min">Minimalna</option>
+                    <option value="max">Maksymalna</option>
+                </select>
+            </div>
+        </script>
+
+        <script type="text/html" id="template-smoothing-tool">
+            <div class="smoothing-tool-options">
+                <label>
+                    Wybierz:
+                    <select>
+                        <option value="-">Maska własna</option>
+
+                        <optgroup label="Filtracja dolnoprzepustowa (wygładzanie)">
+                            <option value="fd-0">Maska 1/8</option>
+                            <option value="fd-1">Maska 1/9</option>
+                            <option value="fd-2">Maska 1/10</option>
+                            <option value="fd-3">Maska 1/16</option>
+                        </optgroup>
+
+                        <optgroup label="Filtracja górnoprzepustowa (wyostrzanie)">
+                            <option value="fg-0">Maska 1</option>
+                            <option value="fg-1">Maska 2</option>
+                            <option value="fg-2">Maska 3</option>
+                            <option value="fg-3">Maska 4</option>
+                            <option value="fg-4">Maska 5</option>
+                        </optgroup>
+
+                        <optgroup label="Detekcja krawędzi">
+                            <option value="dk-0">Maska 1</option>
+                            <option value="dk-1">Maska 2</option>
+                            <option value="dk-2">Maska 3</option>
+                        </optgroup>
+                    </select>
+                </label>
+            </div>
+
+            <hr/>
+
+            <div class="smoothing-tool-preview">
+                <fieldset>
+                    <legend>Maska</legend>
+                    <table>
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                    </table>
+                </fieldset>
+
+                <label class="smoothing-tool-preview-divisor-label">
+                    Dzielnik
+                    <input class="smoothing-tool-preview-divisor disabled" type="text" disabled="disabled">
+                </label>
+
+                <input type="submit" value="Zaktualizuj">
+            </div>
+
+            <div class="smoothing-tool-scale">
+                <fieldset>
+                    <legend>Metody skalowania</legend>
+                    <label>
+                        <input type="radio" name="smoothing-tool-scale" value="proportion" checked="checked">Proporcjonalna
+                    </label>
+                    <label>
+                        <input type="radio" name="smoothing-tool-scale" value="ternary">Trójwartościowa
+                    </label>
+                    <label>
+                        <input type="radio" name="smoothing-tool-scale" value="cutting">Obcinająca
+                    </label>
+                </fieldset>
+            </div>
+        </script>
+
+        <script type="text/html" id="template-stretch-tool">
+            <div class="stretch-tool-content">
+                <span>Początek:</span>
+                <input class="stretch-tool-regulation-value-min" type="text" maxlength="3">
+                <input class="stretch-tool-regulation-range-min" type="range" min="2" max="255">
+
+                <hr />
+
+                <span>Koniec:</span>
+                <input class="stretch-tool-regulation-value-max" type="text" maxlength="3">
+                <input class="stretch-tool-regulation-range-max" type="range" min="2" max="255">
+            </div>
+        </script>
+
+        <script type="text/html" id="template-threshold-tool">
+            <div class="threshold-tool-content">
+                <span>Poziom progu:</span>
+                <input class="threshold-tool-regulation-value" type="text" maxlength="3">
+                <input class="threshold-tool-regulation-range" type="range" min="0" max="255">
+            </div>
+        </script>
+
+    </div>
+
+    <div id="scripts" class="hide">
+        <!-- vendor //-->
+        <script src="scripts/vendor/MoveMaster/MoveMaster.js"></script>
+        <script src="scripts/vendor/underscore/underscore.js"></script>
+        <script src="scripts/vendor/underscore/underscore.assert.js"></script>
+        <script src="scripts/vendor/EventEmitter/EventEmitter.js"></script>
+        <script src="scripts/vendor/promise/promise.js"></script>
+
+        <!-- core/common //-->
+        <script src="scripts/core/common/AssetsLoader.js"></script>
+        <script src="scripts/core/common/KeyboardShortcut.js"></script>
+        <script src="scripts/core/common/Status.js"></script>
+        <script src="scripts/core/common/Utilities.js"></script>
+
+        <!-- core/file //-->
+        <script src="scripts/core/file/AbstractFileHelper.js"></script>
+        <script src="scripts/core/file/FileOpenHelper.js"></script>
+        <script src="scripts/core/file/FileSaveHelper.js"></script>
+
+        <!-- core/models //-->
+        <script src="scripts/core/models/Canvas.js"></script>
+        <script src="scripts/core/models/CanvasHelper.js"></script>
+        <script src="scripts/core/models/InputRangeHelper.js"></script>
+        <script src="scripts/core/models/Locale.js"></script>
+        <script src="scripts/core/models/MenuBuilder.js"></script>
+        <script src="scripts/core/models/Operation.js"></script>
+
+        <!-- core/operations //-->
+        <script src="scripts/core/operations/Colorize.js"></script>
+        <script src="scripts/core/operations/OperationsFlatteningHistogram.js"></script>
+        <script src="scripts/core/operations/OperationsMorphological.js"></script>
+        <script src="scripts/core/operations/OperationsNeighbourhood.js"></script>
+        <script src="scripts/core/operations/OperationsOnePoint.js"></script>
+        <script src="scripts/core/operations/TurtleAlgorithm.js"></script>
+
+        <!-- core/windows //-->
+        <script src="scripts/core/windows/AbstractWindow.js"></script>
+        <script src="scripts/core/windows/WindowManager.js"></script>
+
+        <!-- core/windows/special //-->
+        <script src="scripts/core/windows/special/ObjectsRecognitionWindow.js"></script>
+        <script src="scripts/core/windows/special/StopMotionSequenceWindow.js"></script>
+
+        <!-- core/windows/static //-->
+        <script src="scripts/core/windows/static/LookUpTableWindow.js"></script>
+        <script src="scripts/core/windows/static/MultiplePicturesWindow.js"></script>
+        <script src="scripts/core/windows/static/PictureWindow.js"></script>
+        <script src="scripts/core/windows/static/UOPWindow.js"></script>
+
+        <!-- core/windows/tools //-->
+        <script src="scripts/core/windows/tools/ArithmeticalLogicalTool.js"></script>
+        <script src="scripts/core/windows/tools/BrightnessRegulationTool.js"></script>
+        <script src="scripts/core/windows/tools/ChooseColorTurtleAlgorithmTool.js"></script>
+        <script src="scripts/core/windows/tools/ContrastRegulationTool.js"></script>
+        <script src="scripts/core/windows/tools/GammaRegulationTool.js"></script>
+        <script src="scripts/core/windows/tools/MorphologicalTool.js"></script>
+        <script src="scripts/core/windows/tools/PosterizeTool.js"></script>
+        <script src="scripts/core/windows/tools/SmoothingTool.js"></script>
+        <script src="scripts/core/windows/tools/StretchTool.js"></script>
+        <script src="scripts/core/windows/tools/ThresholdTool.js"></script>
+
+        <!-- core //-->
+        <script src="scripts/core/app.js"></script>
+        <script src="scripts/core/bootstrap.js"></script>
+
+        <!-- locale //-->
+        <script src="scripts/locale/pl_PL.js"></script>
+    </div>
 </body>
 </html>
