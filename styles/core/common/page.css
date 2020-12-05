@@ -8,34 +8,3 @@ body {
     position: relative;
     font-weight: 300;
 }
-
-body:after {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    width: 490px;
-    height: 60px;
-    text-align: center;
-    content: "APO: Photoshop";
-    font-size: 50px;
-    color: #fff;
-    text-shadow: 1px 1px 3px #000;
-    z-index: 1;
-    opacity: 0.2;
-    background: url("../../../images/wsisiz.png") no-repeat 0 center;
-}
-
-#status {
-    position: absolute;
-    right: 0;
-    top: 0;
-    border-bottom-left-radius: 5px;
-    background: rgba(0, 0, 0, 0.4);
-    color: #fff;
-    font-size: 10px;
-    padding: 3px 10px 3px 5px;
-    transition: opacity 0.2s;
-}
