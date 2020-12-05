@@ -1,0 +1,50 @@
+.smoothing-tool-options {
+    float: left;
+    margin: 0 0 10px 0;
+}
+
+.smoothing-tool hr {
+    clear: both;
+    padding: 0;
+    margin: 10px 0;
+    border: none;
+    border-top: 1px solid #abaaba;
+}
+
+.smoothing-tool-preview {
+    float: left;
+}
+
+.smoothing-tool-preview fieldset {
+    border: 1px solid #abaaba;
+}
+
+.smoothing-tool-scale {
+    float: right;
+}
+
+.smoothing-tool-scale fieldset {
+    border: 1px solid #abaaba;
+}
+
+.smoothing-tool-preview input[type="text"] {
+    width: 40px;
+    height: 30px;
+    border: none;
+    text-align: center;
+}
+
+.smoothing-tool-preview input[type="submit"] {
+    display: block;
+    margin: 10px auto 0;
+}
+
+.smoothing-tool-preview-divisor-label {
+    text-align: center;
+    display: block;
+    margin: 10px 0 0 0;
+}
+
+.smoothing-tool-scale label {
+    display: block;
+}

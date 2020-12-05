@@ -1,0 +1,26 @@
+.stretch-tool-content {
+    width: 300px;
+    height: 70px;
+}
+
+body.windows .stretch-tool-content {
+    height: 85px;
+}
+
+.stretch-tool-content span {
+    display: inline-block;
+    width: 60px;
+}
+
+.stretch-tool-content input[type="text"] {
+    display: inline-block;
+    width: 30px;
+    margin: 0 5px;
+    text-align: center;
+}
+
+.stretch-tool-content input[type="range"] {
+    display: inline-block;
+    width: 180px;
+    margin: 4px 0 0 0;
+}

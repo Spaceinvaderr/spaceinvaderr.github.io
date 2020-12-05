@@ -1,0 +1,43 @@
+.uop-window .abstract-window-content {
+    max-width: 700px;
+    overflow: auto;
+}
+
+.uop-window table.uop-static-content {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.uop-window table.uop-static-content thead {
+    border-bottom: 1px solid #ba9d37;
+}
+
+.uop-window table.uop-static-content thead th,
+.uop-window table.uop-static-content tbody td {
+    overflow: hidden;
+    width: 42px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 0 0 8px;
+}
+
+body.windows .uop-window table.uop-static-content thead th,
+body.windows .uop-window table.uop-static-content tbody td {
+    width: 43px;
+}
+
+.uop-window table.uop-static-content tbody td {
+    text-align: left;
+}
+
+.uop-window table.uop-static-content tbody td input {
+    width: 32px;
+    border: none;
+    background: transparent;
+    color: inherit;
+}
+
+body.windows .uop-window table.uop-static-content tbody td input {
+    width: 36px;
+}
