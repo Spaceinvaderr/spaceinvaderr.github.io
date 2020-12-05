@@ -62,8 +62,8 @@
         // If application run under Mac OS must set that option, to fixed main window menu.
         if (root.Utilities.isDarwin()) {
             this.windowMenu.createMacBuiltin(root.Locale.get('NAME'), {
-                hideEdit: true,
-                hideWindow: true
+                hideEdit: false,
+                hideWindow: false
             });
         }
     };
