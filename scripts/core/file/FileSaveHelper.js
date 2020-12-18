@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
 
-    let fs = require('browserify-fs');
+    let fs = require('fs');
 
     // Aliases.
     let doc = root.document;
