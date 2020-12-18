@@ -1,26 +1,29 @@
 // dependencies
-const gulp = require('gulp');
-const markdownpdf = require('gulp-markdown-pdf');
-const rename = require("gulp-rename");
-const NwBuilder = require('node-webkit-builder');
-const browserify = require('gulp-browserify');
+var webpack = require('webpack');
+var gulp = require('gulp');
+var markdownpdf = require('gulp-markdown-pdf');
+var rename = require("gulp-rename");
+var NwBuilder = require('node-webkit-builder');
+var browserify = require('gulp-browserify');
 
 
 // node.js modules
-const path = require('path');
-const del = require('del');
-const cjson = require('cjson');
-const { stat } = require('fs');
+var path = require('path');
+var del = require('del');
+var cjson = require('cjson');
+var { stat } = require('fs');
 
 // show simple help menu
 require('gulp-help')(gulp);
 
-let paths = {
+var compiler = webpack('./webpack.config.js');
+
+var paths = {
     scripts: [path.join(__dirname, 'app', 'scripts', 'core', '**', '*js')]
 };
 
 gulp.task('build', 'Building application for distribution.', function (cb) {
-    let nw = new NwBuilder({
+    var nw = new NwBuilder({
         files: [
             'app/**/**',
             'package.json'
@@ -28,6 +31,14 @@ gulp.task('build', 'Building application for distribution.', function (cb) {
         platforms: ['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64'],
         buildDir: './dist'
     });
+    compiler.run(function (err, stats){ 
+        if(err) {
+            gutil.log('error', new gutil.PluginError('[webpack]', err));
+          }
+        printReport(stats);
+        callback();
+    });
+});
 
     // nw.on('log', console.log);
 
