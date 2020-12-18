@@ -4,6 +4,8 @@
   "description": "Aplikacja Internetowa dla przetwarzania obrazów",
   "main": "gulpfile.js",
   "dependencies": {
+    "browserify-fs": "^1.0.0",
+    "path-browserify": "^1.0.1",
     "requirejs": "^2.3.6"
   },
   "devDependencies": {
@@ -28,6 +30,7 @@
   },
   "homepage": "https://github.com/Spaceinvaderr/spaceinvaderr.github.io#readme",
   "browser": {
-    "fs": "level-fs"
+    "fs": "level-fs",
+    "path": "path"
   }
 }
