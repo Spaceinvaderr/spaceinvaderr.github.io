@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "gulp": "^4.0.2",
+    "gulp-browserify": "^0.5.1",
     "gulp-ejs": "^5.1.0",
     "gulp-markdown-pdf": "^8.0.0",
     "gulp-rename": "^2.0.0",

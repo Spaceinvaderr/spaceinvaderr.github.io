@@ -2,9 +2,9 @@
     'use strict';
 
     // Aliases.
-    const doc = root.document;
+    let doc = root.document;
 
-    const Canvas = function (params) {
+    let Canvas = function (params) {
         this.settings = {
             width: 100,
             height: 50
@@ -21,7 +21,7 @@
     Canvas.prototype.initialize = function () {
         // Create <canvas> object.
         this.$canvas = doc.createElement('canvas');
-        this.$canvas.id = _.uniqueId('canvas-');
+        this.$canvas.id = _.uniqueId('canvas-');s
 
         // Set dimensions.
         this.setWidth();

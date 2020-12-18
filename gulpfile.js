@@ -3,6 +3,8 @@ const gulp = require('gulp');
 const markdownpdf = require('gulp-markdown-pdf');
 const rename = require("gulp-rename");
 const NwBuilder = require('node-webkit-builder');
+const browserify = require('gulp-browserify');
+
 
 // node.js modules
 const path = require('path');
@@ -39,6 +41,9 @@ gulp.task('build:help', 'Building help.pdf from README.md.', function () {
     return gulp.src('README.md')
         .pipe(markdownpdf())
         //.pipe(rename('docs/help.pdf'))
+        .pipe(browserify({
+            insertGlobals: true
+        }))
         .pipe(gulp.dest('./app/'));
 });
 
