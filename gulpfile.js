@@ -1,5 +1,4 @@
 // dependencies
-const webpack = require('webpack');
 const gulp = require('gulp');
 const markdownpdf = require('gulp-markdown-pdf');
 const rename = require("gulp-rename");
@@ -48,16 +47,3 @@ gulp.task('build:help', 'Building help.pdf from README.md.', function () {
         }))
         .pipe(gulp.dest('./app/'));
 });
-
-webpack({
-    mode: 'development',
-    entry: './scripts/core/app.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'app.bundle.js'
-  }
-  }, (err, stats) => { // [Stats Object](#stats-object)
-    if (err || stats.hasErrors()) {
-        console.log(err || stats.hasErrors());
-    }
-  });
