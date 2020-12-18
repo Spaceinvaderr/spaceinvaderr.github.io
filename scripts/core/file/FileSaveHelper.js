@@ -3,7 +3,6 @@
 
     let fs = require('browserify-fs');
 
-
     // Aliases.
     let doc = root.document;
 
@@ -12,10 +11,7 @@
         _.extend(this.settings, params);
 
         this.$placeHolder = doc.querySelector(root.WindowManager.RENDER_AREA_ID);
-        this.$input = null;
-
-        
-
+        this.$input = null;xs
         this.initialize();
     };
 
