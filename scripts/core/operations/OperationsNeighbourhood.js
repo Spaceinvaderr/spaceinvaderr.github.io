@@ -1,34 +1,34 @@
 (function (root) {
     'use strict';
 
-    let OperationsNeighbourhood = {
+    var OperationsNeighbourhood = {
         smoothing: function (contextWindow, params) {
-            let can = contextWindow.settings.picture.canvas;
-            let ctx = can.ctx;
-            let mask = params.mask;
-            let type = params.type;
-            let sum = root.Utilities.sum(mask) || 1;
-            let scale = params.scale;
-            let width = can.settings.width;
-            let height = can.settings.height;
+            var can = contextWindow.settings.picture.canvas;
+            var ctx = can.ctx;
+            var mask = params.mask;
+            var type = params.type;
+            var sum = root.Utilities.sum(mask) || 1;
+            var scale = params.scale;
+            var width = can.settings.width;
+            var height = can.settings.height;
 
-            let pixelsChannels = can.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
-            let len = pixelsChannelsData.length;
+            var pixelsChannels = can.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
+            var len = pixelsChannelsData.length;
 
             // Get only first channel per each pixel from image.
-            let pixelsArray = can.getOneChannelOfPixels();
+            var pixelsArray = can.getOneChannelOfPixels();
 
             // Convert list of pixels to matrix for quicker calculation.
-            let pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, width);
+            var pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, width);
 
             // Add border to matrix of pixels.
-            let pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, 0);
+            var pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, 0);
 
-            let i, color, x, y, dimensions, ne;
+            var i, color, x, y, dimensions, ne;
 
             function calculateMask(ne) {
-                let temp = 0;
+                var temp = 0;
 
                 // Multiply mask with neighbours.
                 _.each(ne, function (n, index) {
@@ -75,11 +75,11 @@
 
             // Support only 'Filtracja górnoprzepustowa'.
             if (type === 'fg') {
-                let uniquePixelsChannels = can.getUniqueChannels();
+                var uniquePixelsChannels = can.getUniqueChannels();
 
                 if (scale === 'proportion') {
-                    let min = _.first(uniquePixelsChannels);
-                    let max = _.last(uniquePixelsChannels);
+                    var min = _.first(uniquePixelsChannels);
+                    var max = _.last(uniquePixelsChannels);
 
                     for (i = 0; i < len / 4; i++) {
                         color = pixelsChannelsData[(i * 4)];
@@ -91,7 +91,7 @@
                         }
                     }
 
-                    let difference = max - min;
+                    var difference = max - min;
 
                     for (i = 0; i < len / 4; i++) {
                         color = pixelsChannelsData[(i * 4)];
@@ -117,24 +117,24 @@
         },
 
         sharpen: function (contextWindow, params) {
-            let type = params.type;
-            let can = contextWindow.settings.picture.canvas;
-            let ctx = can.ctx;
+            var type = params.type;
+            var can = contextWindow.settings.picture.canvas;
+            var ctx = can.ctx;
 
-            let pixelsChannels = can.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
+            var pixelsChannels = can.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
 
             // Copy to array all channels. References was destroyed.
-            let pixelsArray = can.getOneChannelOfPixels();
+            var pixelsArray = can.getOneChannelOfPixels();
 
             // Convert list of pixels to matrix. Quicker calculation.
-            let pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, can.settings.width);
+            var pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, can.settings.width);
 
-            let i = 0;
+            var i = 0;
 
             _.each(pixelsMatrix, function (row, y) {
                 _.each(row, function (color, x) {
-                    let ne = root.CanvasHelper.getNeighbors(pixelsMatrix, x, y);
+                    var ne = root.CanvasHelper.getNeighbors(pixelsMatrix, x, y);
 
                     // Sorting for calculate median.
                     ne = ne.sort(root.Utilities.sortNumbers);
@@ -142,7 +142,7 @@
                     switch (type) {
                         case 'med':
                             // Calculate middle value.
-                            let mid = (ne.length - 1) / 2;
+                            var mid = (ne.length - 1) / 2;
 
                             // Update color.
                             if (ne.length % 2 === 1) {

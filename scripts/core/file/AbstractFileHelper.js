@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
 
-    let AbstractFileHelper = function () {
+    var AbstractFileHelper = function () {
 
     };
 

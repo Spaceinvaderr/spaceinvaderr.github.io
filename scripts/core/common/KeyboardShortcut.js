@@ -3,12 +3,12 @@
 (function (root) {
     'use strict';
 
-    let shortcuts = new WeakMap();
+    var shortcuts = new WeakMap();
 
-    let KeyboardShortcut = {
+    var KeyboardShortcut = {
 
         handler: function (evt) {
-            let shortcut = [];
+            var shortcut = [];
 
             if (evt.metaKey) {
                 if (root.Utilities.isDarwin()) {
@@ -26,10 +26,10 @@
                 shortcut.push('Shift');
             }
 
-            let char = String.fromCharCode(evt.keyCode);
+            var char = String.fromCharCode(evt.keyCode);
             shortcut.push(char);
 
-            let definedShortcut = shortcuts[shortcut];
+            var definedShortcut = shortcuts[shortcut];
 
             if (definedShortcut) {
                 definedShortcut.call();
@@ -37,7 +37,7 @@
         },
 
         add: function (type, callback) {
-            let elements = _.map(type.split('-'), function (item) {
+            var elements = _.map(type.split('-'), function (item) {
                 return item.trim();
             });
             shortcuts[elements] = callback;

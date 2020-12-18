@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
 
-    let Locale = (root.Locale = root.Locale || {});
+    var Locale = (root.Locale = root.Locale || {});
 
     Locale.__name__ = 'pl_PL';
 

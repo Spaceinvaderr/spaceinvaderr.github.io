@@ -1,18 +1,18 @@
 (function (root) {
     'use strict';
 
-    let OperationsOnePoint = {
+    var OperationsOnePoint = {
 
         // Operacje -> Jednopunktowe -> Odwrotność (negacja)
         onePointNegative: function (contextWindow) {
-            let can = contextWindow.settings.picture.canvas;
-            let ctx = can.ctx;
+            var can = contextWindow.settings.picture.canvas;
+            var ctx = can.ctx;
 
-            let pixelsChannels = can.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
-            let len = pixelsChannelsData.length;
+            var pixelsChannels = can.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
+            var len = pixelsChannelsData.length;
 
-            let i, color;
+            var i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -36,15 +36,15 @@
 
         // Operacje -> Jednopunktowe -> Progowanie
         onePointThreshold: function (contextWindow, params) {
-            let can = contextWindow.settings.picture.canvas;
-            let ctx = can.ctx;
+            var can = contextWindow.settings.picture.canvas;
+            var ctx = can.ctx;
 
-            let pixelsChannels = can.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
-            let len = pixelsChannelsData.length;
-            let hold = parseInt(params.value, 10);
+            var pixelsChannels = can.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
+            var len = pixelsChannelsData.length;
+            var hold = parseInt(params.value, 10);
 
-            let i, color;
+            var i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -65,32 +65,32 @@
 
         // Operacje -> Jednopunktowe -> Redukcja poziomów szarości
         onePointPosterize: function (contextWindow, params) {
-            let can = contextWindow.settings.picture.canvas;
-            let ctx = can.ctx;
+            var can = contextWindow.settings.picture.canvas;
+            var ctx = can.ctx;
 
-            let pixelsChannels = can.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
-            let len = pixelsChannelsData.length;
-            let levels = parseInt(params.value, 10);
+            var pixelsChannels = can.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
+            var len = pixelsChannelsData.length;
+            var levels = parseInt(params.value, 10);
 
-            let numOfAreas = 256 / levels;
-            let numOfValues = 255 / (levels - 1);
+            var numOfAreas = 256 / levels;
+            var numOfValues = 255 / (levels - 1);
 
-            let i, color;
+            var i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
 
                 // for more comments see http://www.axiomx.com/posterize.htm
-                let colorAreaFloat = color / numOfAreas;
-                let colorArea = parseInt(colorAreaFloat, 10);
+                var colorAreaFloat = color / numOfAreas;
+                var colorArea = parseInt(colorAreaFloat, 10);
 
                 if (colorArea > colorAreaFloat) {
                     colorArea = colorArea - 1;
                 }
 
-                let newColorFloat = numOfValues * colorArea;
-                let newColor = parseInt(newColorFloat, 10);
+                var newColorFloat = numOfValues * colorArea;
+                var newColor = parseInt(newColorFloat, 10);
 
                 if (newColor > newColorFloat) {
                     newColor = newColor - 1;
@@ -114,16 +114,16 @@
 
         // Operacje -> Jednopunktowe -> Rozciąganie
         onePointStretching: function (contextWindow, params) {
-            let can = contextWindow.settings.picture.canvas;
-            let ctx = can.ctx;
+            var can = contextWindow.settings.picture.canvas;
+            var ctx = can.ctx;
 
-            let pixelsChannels = can.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
-            let len = pixelsChannelsData.length;
-            let min = parseInt(params.value.min, 10);
-            let max = parseInt(params.value.max, 10);
+            var pixelsChannels = can.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
+            var len = pixelsChannelsData.length;
+            var min = parseInt(params.value.min, 10);
+            var max = parseInt(params.value.max, 10);
 
-            let i, color;
+            var i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -150,15 +150,15 @@
 
         // Operacje -> Jednopunktowe -> Regulacja jasnością
         onePointBrightnessRegulation: function (contextWindow, params) {
-            let can = contextWindow.settings.picture.canvas;
-            let ctx = can.ctx;
+            var can = contextWindow.settings.picture.canvas;
+            var ctx = can.ctx;
 
-            let pixelsChannels = can.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
-            let len = pixelsChannelsData.length;
-            let hold = parseInt(params.value, 10);
+            var pixelsChannels = can.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
+            var len = pixelsChannelsData.length;
+            var hold = parseInt(params.value, 10);
 
-            let i, color;
+            var i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -181,19 +181,19 @@
 
         // Operacje -> Jednopunktowe -> Regulacja kontrastem
         onePointContrastRegulation: function (contextWindow, params) {
-            let can = contextWindow.settings.picture.canvas;
-            let ctx = can.ctx;
+            var can = contextWindow.settings.picture.canvas;
+            var ctx = can.ctx;
 
-            let pixelsChannels = can.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
-            let len = pixelsChannelsData.length;
-            let hold = parseInt(params.value, 10);
+            var pixelsChannels = can.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
+            var len = pixelsChannelsData.length;
+            var hold = parseInt(params.value, 10);
 
-            let uniquePixelsChannels = can.getUniqueChannels();
-            let multiplier = (100.0 + hold) / 100.0;
-            let lmax = (uniquePixelsChannels.length - 1);
+            var uniquePixelsChannels = can.getUniqueChannels();
+            var multiplier = (100.0 + hold) / 100.0;
+            var lmax = (uniquePixelsChannels.length - 1);
 
-            let i, color, temp;
+            var i, color, temp;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -218,19 +218,19 @@
 
         // Operacje -> Jednopunktowe -> Regulacja korekcją gamma
         onePointGammaRegulation: function (contextWindow, params) {
-            let can = contextWindow.settings.picture.canvas;
-            let ctx = can.ctx;
+            var can = contextWindow.settings.picture.canvas;
+            var ctx = can.ctx;
 
-            let pixelsChannels = can.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
-            let len = pixelsChannelsData.length;
-            let hold = parseInt(params.value, 10);
+            var pixelsChannels = can.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
+            var len = pixelsChannelsData.length;
+            var hold = parseInt(params.value, 10);
 
-            let uniquePixelsChannels = can.getUniqueChannels();
-            let upo = new Array(uniquePixelsChannels.length);
-            let lmax = (uniquePixelsChannels.length - 1);
+            var uniquePixelsChannels = can.getUniqueChannels();
+            var upo = new Array(uniquePixelsChannels.length);
+            var lmax = (uniquePixelsChannels.length - 1);
 
-            let j, pos;
+            var j, pos;
 
             for (j = 0; j < uniquePixelsChannels.length; ++j) {
                 pos = (lmax * Math.pow(j / lmax, 1.0 / hold)) + 0.5;
@@ -238,7 +238,7 @@
                 upo[j] = pos;
             }
 
-            let i, color;
+            var i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -258,17 +258,17 @@
 
         // Operacje -> Jednopunktowe -> Arytmetyczne i Logiczne
         onePointArithmeticalLogical: function (contextWindow, params) {
-            let can = contextWindow.settings.picture.canvas;
-            let ctx = can.ctx;
+            var can = contextWindow.settings.picture.canvas;
+            var ctx = can.ctx;
 
-            let pixelsChannels = can.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
-            let len = pixelsChannelsData.length;
+            var pixelsChannels = can.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
+            var len = pixelsChannelsData.length;
 
-            let firstPicturePixels = params.firstPicture.canvas.getAllChannelsOfPixels();
-            let secondPicturePixels = params.secondPicture.canvas.getAllChannelsOfPixels();
+            var firstPicturePixels = params.firstPicture.canvas.getAllChannelsOfPixels();
+            var secondPicturePixels = params.secondPicture.canvas.getAllChannelsOfPixels();
 
-            let i, color, first, second;
+            var i, color, first, second;
 
             switch (params.operation) {
                 case 'add':
@@ -382,14 +382,14 @@
 
         // Okno -> UOP
         onePointUOP: function (contextWindow, params) {
-            let can = contextWindow.settings.picture.canvas;
-            let canCopy = params.copy.canvas;
+            var can = contextWindow.settings.picture.canvas;
+            var canCopy = params.copy.canvas;
 
-            let pixelsChannels = canCopy.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
-            let len = pixelsChannelsData.length;
+            var pixelsChannels = canCopy.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
+            var len = pixelsChannelsData.length;
 
-            let i, color;
+            var i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];

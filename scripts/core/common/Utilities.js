@@ -3,17 +3,17 @@
 (function (root) {
     'use strict';
 
-    let Utilities = {
+    var Utilities = {
 
         isDarwin: function () {
             return process.platform === 'darwin';
         },
 
         max: function () {
-            let args = _.toArray(arguments);
+            var args = _.toArray(arguments);
 
             // Remove non-numbers elements, ex. all `undefined` values.
-            let numbers = _.filter(args, function (item) {
+            var numbers = _.filter(args, function (item) {
                 return !isNaN(item);
             });
 
@@ -22,15 +22,15 @@
         },
 
         average: function () {
-            let args = _.toArray(arguments);
+            var args = _.toArray(arguments);
 
             // Remove non-numbers elements, ex. all `undefined` values.
-            let numbers = _.filter(args, function (item) {
+            var numbers = _.filter(args, function (item) {
                 return !isNaN(item);
             });
 
             // Calculate summary of all numbers.
-            let sum = numbers.reduce(function (mem, item) {
+            var sum = numbers.reduce(function (mem, item) {
                 return mem + (item || 0);
             }, 0);
 
@@ -60,7 +60,7 @@
         },
 
         sortNumbers: function (a, b) {
-            let type = 0;
+            var type = 0;
 
             if (a > b) {
                 type = 1;
@@ -78,10 +78,10 @@
         },
 
         hex2rgb: function (hex) {
-            let bigint = parseInt(hex, 16);
-            let r = (bigint >> 16) & 255;
-            let g = (bigint >> 8) & 255;
-            let b = bigint & 255;
+            var bigint = parseInt(hex, 16);
+            var r = (bigint >> 16) & 255;
+            var g = (bigint >> 8) & 255;
+            var b = bigint & 255;
 
             return [r, g, b];
         }

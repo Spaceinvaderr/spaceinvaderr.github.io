@@ -2,9 +2,9 @@
     'use strict';
 
     // Aliases.
-    let doc = root.document;
+    var doc = root.document;
 
-    let FileOpenHelper = function FileOpenHelper(params) {
+    var FileOpenHelper = function FileOpenHelper(params) {
         this.settings = {
 
         };
@@ -20,14 +20,14 @@
     FileOpenHelper.prototype.constructor = FileOpenHelper;
 
     FileOpenHelper.prototype.createInput = function () {
-        let self = this;
+        var self = this;
 
         this.$input = doc.createElement('input');
         this.$input.setAttribute('type', 'file');
         this.$input.setAttribute('multiple', 'multiple');
         this.$input.classList.add('hide');
         this.$input.addEventListener('change', function () {
-            let files = [];
+            var files = [];
 
             _.each(self.$input.files, function (image) {
                 files.push({

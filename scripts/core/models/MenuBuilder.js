@@ -3,8 +3,8 @@
 (function (root) {
     'use strict';
 
-    const path = require('path');
-    const gui = require('nw.gui');
+    var path = require('path');
+    var gui = require('nw.gui');
 
     function MenuBuilder() {
         this.windowMenu = null;
@@ -86,7 +86,7 @@
             root.KeyboardShortcut.add(modifiers + '-' + key, callback);
         }
 
-        let subMenu = new gui.MenuItem({
+        var subMenu = new gui.MenuItem({
             type: 'normal',
             label: label,
             key: key,
@@ -101,7 +101,7 @@
     };
 
     MenuBuilder.prototype.addSeparator = function (menu) {
-        let separator = new gui.MenuItem({
+        var separator = new gui.MenuItem({
             type: 'separator'
         });
 
@@ -113,14 +113,14 @@
     // Setup methods.
 
     MenuBuilder.prototype.setupFileMenu = function () {
-        let fileMenu = new gui.Menu();
+        var fileMenu = new gui.Menu();
 
         // true - OK, false - ERROR
         function validateParams(params) {
-            let i, j, name, exp;
-            let supportedArray = [];
-            let names = _.pluck(params, 'name');
-            let supported = root.AssetsLoader.SUPPORTED_EXTENSIONS;
+            var i, j, name, exp;
+            var supportedArray = [];
+            var names = _.pluck(params, 'name');
+            var supported = root.AssetsLoader.SUPPORTED_EXTENSIONS;
 
             for (i = 0; i < names.length; i++) {
                 name = names[i];
@@ -139,7 +139,7 @@
         }
 
         function buildCanvasFromImage(picture) {
-            let canvas = new root.Canvas({
+            var canvas = new root.Canvas({
                 width: picture.width,
                 height: picture.height
             });
@@ -149,12 +149,12 @@
         }
 
         function loadImages(params, callback) {
-            let picturesLoaders = [];
+            var picturesLoaders = [];
 
             // Loop through each of file (images).
             _.each(params, function (image, index) {
                 picturesLoaders.push(function () {
-                    let p = new root.promise.Promise();
+                    var p = new root.promise.Promise();
 
                     // Load selected file.
                     root.AssetsLoader.loadImage(image.file, function (file) {
@@ -171,7 +171,7 @@
         }
 
         function openFilHandler() {
-            let multipleFile = new root.FileOpenHelper();
+            var multipleFile = new root.FileOpenHelper();
 
             multipleFile.once(root.AbstractFileHelper.EVENTS.LOAD_FILES, function (params) {
                 if (!validateParams(params)) {
@@ -194,7 +194,7 @@
         }
 
         function saveFileHandler() {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 activeWindow.saveAsPicture();
@@ -202,7 +202,7 @@
         }
 
         function closeActiveWindowHandler() {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow !== null) {
                 root.App.windowManager.emit(root.AbstractWindow.EVENTS.CLOSE_WINDOW, { win: activeWindow });
@@ -247,12 +247,12 @@
     };
 
     MenuBuilder.prototype.setupEditMenu = function () {
-        let fileMenu = new gui.Menu();
+        var fileMenu = new gui.Menu();
 
         // -------------------------------------------------------------------------------------------------------------
 
         this.editRestoreMenuItem = this.addMenuItem(root.Locale.get('EDIT_RESTORE'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 activeWindow.setPrimaryState();
@@ -269,16 +269,16 @@
     };
 
     MenuBuilder.prototype.setupToolsMenu = function () {
-        let toolsMenu = new gui.Menu();
+        var toolsMenu = new gui.Menu();
 
         // -------------------------------------------------------------------------------------------------------------
 
         this.toolsDuplicateMenuItem = this.addMenuItem(root.Locale.get('TOOLS_DUPLICATE'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
-                let original = activeWindow.getPicture();
-                let copy = _.clone(original);
+                var original = activeWindow.getPicture();
+                var copy = _.clone(original);
 
                 copy.canvas = original.canvas.copy();
                 copy.name += ' - ' + root.Locale.get('MSG_COPY');
@@ -297,14 +297,14 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.toolsLutMenuItem = this.addMenuItem(root.Locale.get('TOOLS_LUT'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 // Save current version.
-                let current = activeWindow.getPicture().canvas;
+                var current = activeWindow.getPicture().canvas;
 
                 // Restore to original version.
-                let original = new root.Canvas(current.settings);
+                var original = new root.Canvas(current.settings);
                 original.ctx.drawImage(current.toImage(), 0, 0, activeWindow.getPicture().width, activeWindow.getPicture().height);
 
                 new root.LookUpTableWindow(activeWindow, {
@@ -321,11 +321,11 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.toolsUOPMenuItem = this.addMenuItem(root.Locale.get('TOOLS_UOP'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
-                let original = activeWindow.getPicture();
-                let copy = _.clone(original);
+                var original = activeWindow.getPicture();
+                var copy = _.clone(original);
 
                 copy.canvas = original.canvas.copy();
 
@@ -343,7 +343,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.toolsObjectsRecognitionMenuItem = this.addMenuItem(root.Locale.get('TOOLS_OBJECTS_RECOGNITION'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.MultiplePicturesWindow) {
                 new root.ObjectsRecognitionWindow(activeWindow, {
@@ -360,7 +360,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.toolsStopMotionSequenceMenuItem = this.addMenuItem(root.Locale.get('TOOLS_STOP_MOTION_SEQUENCE'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.MultiplePicturesWindow) {
                 new root.StopMotionSequenceWindow(activeWindow, {
@@ -379,17 +379,17 @@
     };
 
     MenuBuilder.prototype.setupOperationsMenu = function () {
-        let operationItem = new gui.MenuItem({
+        var operationItem = new gui.MenuItem({
             label: root.Locale.get('OPERATIONS')
         });
 
         // Wygładzanie histogramu
         // ----------------------
 
-        let flatteningHistogramOperationsMenu = new gui.Menu();
+        var flatteningHistogramOperationsMenu = new gui.Menu();
 
         this.operationsFlatteningHistogramMediumMethodMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_FLATTENING_HISTOGRAM_MEDIUM_METHOD'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.Operation(function () {
@@ -402,7 +402,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsFlatteningHistogramRandomMethodMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_FLATTENING_HISTOGRAM_RANDOM_METHOD'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.Operation(function () {
@@ -415,7 +415,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsFlatteningHistogramNeighboudhoodMethodMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_FLATTENING_HISTOGRAM_NEIGHBOURHOOD_METHOD'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.Operation(function () {
@@ -428,7 +428,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsFlatteningHistogramCustomMethodMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_FLATTENING_HISTOGRAM_CUSTOM_METHOD'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.Operation(function () {
@@ -440,16 +440,16 @@
 
         // -------------------------------------------------------------------------------------------------------------
 
-        let histogramOperationsMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_FLATTENING_HISTOGRAM'));
+        var histogramOperationsMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_FLATTENING_HISTOGRAM'));
         histogramOperationsMenuItem.submenu = flatteningHistogramOperationsMenu;
 
         // Jednopunktowe
         // -------------
 
-        let onePointOperationsMenu = new gui.Menu();
+        var onePointOperationsMenu = new gui.Menu();
 
         this.operationsOnePointNegativeMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_ONE_POINT_NEGATIVE'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.Operation(function () {
@@ -462,7 +462,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsOnePointThresholdMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_ONE_POINT_THRESHOLD'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.ThresholdTool(activeWindow, {
@@ -475,7 +475,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsOnePointPosterizeMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_ONE_POINT_POSTERIZE'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.PosterizeTool(activeWindow, {
@@ -488,7 +488,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsOnePointStretchingMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_ONE_POINT_STRETCHING'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.StretchTool(activeWindow, {
@@ -501,7 +501,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsOnePointBrightnessRegulationMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_ONE_POINT_BRIGHTNESS_REGULATION'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.BrightnessRegulationTool(activeWindow, {
@@ -514,7 +514,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsOnePointContrastRegulationMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_ONE_POINT_CONTRAST_REGULATION'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.ContrastRegulationTool(activeWindow, {
@@ -527,7 +527,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsOnePointGammaRegulationMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_ONE_POINT_GAMMA_REGULATION'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.GammaRegulationTool(activeWindow, {
@@ -546,18 +546,18 @@
 
         // -------------------------------------------------------------------------------------------------------------
 
-        let onePointOperationsMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_ONE_POINT'));
+        var onePointOperationsMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_ONE_POINT'));
         onePointOperationsMenuItem.submenu = onePointOperationsMenu;
 
         // Sąsiedztwa
         // ----------
 
-        let neighbourhoodOperationsMenu = new gui.Menu();
+        var neighbourhoodOperationsMenu = new gui.Menu();
 
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsNeighbourhoodSmoothingMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_NEIGHBOURHOOD_SMOOTHING'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.SmoothingTool(activeWindow, {
@@ -570,7 +570,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsNeighbourhoodSharpenMediumMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_NEIGHBOURHOOD_SHARPEN_MEDIUM'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.Operation(function () {
@@ -585,7 +585,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsNeighbourhoodSharpenMinimalMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_NEIGHBOURHOOD_SHARPEN_MINIMAL'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.Operation(function () {
@@ -600,7 +600,7 @@
         // -------------------------------------------------------------------------------------------------------------
 
         this.operationsNeighbourhoodSharpenMaximalMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_NEIGHBOURHOOD_SHARPEN_MAXIMAL'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.Operation(function () {
@@ -614,14 +614,14 @@
 
         // -------------------------------------------------------------------------------------------------------------
 
-        let neighbourhoodOperationsMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_NEIGHBOURHOOD'));
+        var neighbourhoodOperationsMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_NEIGHBOURHOOD'));
         neighbourhoodOperationsMenuItem.submenu = neighbourhoodOperationsMenu;
 
         // Morfologiczne
         // -------------
 
         this.morphologicalOperationsMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_MORPHOLOGICAL'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.Operation(function () {
@@ -636,7 +636,7 @@
         // ---------------
 
         this.turtleOperationsMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_TURTLE'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.Operation(function () {
@@ -651,7 +651,7 @@
         // ---------------
 
         this.imageColorfulOperationsMenuItem = this.addMenuItem(root.Locale.get('OPERATIONS_IMAGE_COLORFUL'), function () {
-            let activeWindow = root.App.windowManager.getActiveWindow();
+            var activeWindow = root.App.windowManager.getActiveWindow();
 
             if (activeWindow instanceof root.PictureWindow) {
                 new root.Operation(function () {
@@ -662,7 +662,7 @@
 
         // ----
 
-        let operationsMenu = new gui.Menu();
+        var operationsMenu = new gui.Menu();
         operationsMenu.append(histogramOperationsMenuItem);
         operationsMenu.append(onePointOperationsMenuItem);
         operationsMenu.append(neighbourhoodOperationsMenuItem);
@@ -676,9 +676,9 @@
     };
 
     MenuBuilder.prototype.setupHelpMenu = function () {
-        let helpMenu = new gui.Menu();
+        var helpMenu = new gui.Menu();
 
-        let lines = [
+        var lines = [
             'Autorzy: Piotr Kowalski, Krzysztof Snopkiewicz',
             'Program stworzony na potrzeby zaliczenia APO.',
             'Prowadzący: dr inż. Marek Doros'
@@ -692,7 +692,7 @@
         this.addSeparator(helpMenu);
 
         this.aboutHelpMenuItem = this.addMenuItem(root.Locale.get('ABOUT_HELP'), function () {
-            let pdf = path.resolve('app', 'docs', '');
+            var pdf = path.resolve('app', 'docs', '');
             gui.Shell.openItem(pdf);
         }, 'Ctrl-Shift', 'P');
         helpMenu.append(this.aboutHelpMenuItem);

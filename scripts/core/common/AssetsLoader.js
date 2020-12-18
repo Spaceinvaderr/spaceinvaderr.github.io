@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
 
-    let AssetsLoader = {
+    var AssetsLoader = {
         SUPPORTED_EXTENSIONS: [
             /.\.png/i,
             /.\.jpg/i,
@@ -15,7 +15,7 @@
         },
 
         _useImageConstructor: function (file, callback) {
-            let img = new root.Image();
+            var img = new root.Image();
 
             img.addEventListener('load', function () {
                 callback({

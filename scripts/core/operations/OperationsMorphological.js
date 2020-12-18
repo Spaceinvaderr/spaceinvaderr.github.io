@@ -1,28 +1,28 @@
 (function (root) {
     'use strict';
 
-    let OperationsMorphological = {
+    var OperationsMorphological = {
         erode: function (contextWindow, params) {
-            let can = contextWindow.settings.picture.canvas;
-            let ctx = can.ctx;
-            let figure = params.figure;
-            let width = can.settings.width;
-            let height = can.settings.height;
+            var can = contextWindow.settings.picture.canvas;
+            var ctx = can.ctx;
+            var figure = params.figure;
+            var width = can.settings.width;
+            var height = can.settings.height;
 
-            let pixelsChannels = can.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
-            let len = pixelsChannelsData.length;
+            var pixelsChannels = can.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
+            var len = pixelsChannelsData.length;
 
             // Get only first channel per each pixel from image.
-            let pixelsArray = can.getOneChannelOfPixels();
+            var pixelsArray = can.getOneChannelOfPixels();
 
             // Convert list of pixels to matrix for quicker calculation.
-            let pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, width);
+            var pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, width);
 
             // Add border to matrix of pixels.
-            let pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, -1);
+            var pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, -1);
 
-            let i, color, x, y, dimensions, ne;
+            var i, color, x, y, dimensions, ne;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -47,26 +47,26 @@
         },
 
         dilate: function (contextWindow, params) {
-            let can = contextWindow.settings.picture.canvas;
-            let ctx = can.ctx;
-            let figure = params.figure;
-            let width = can.settings.width;
-            let height = can.settings.height;
+            var can = contextWindow.settings.picture.canvas;
+            var ctx = can.ctx;
+            var figure = params.figure;
+            var width = can.settings.width;
+            var height = can.settings.height;
 
-            let pixelsChannels = can.getDataImage();
-            let pixelsChannelsData = pixelsChannels.data;
-            let len = pixelsChannelsData.length;
+            var pixelsChannels = can.getDataImage();
+            var pixelsChannelsData = pixelsChannels.data;
+            var len = pixelsChannelsData.length;
 
             // Get only first channel per each pixel from image.
-            let pixelsArray = can.getOneChannelOfPixels();
+            var pixelsArray = can.getOneChannelOfPixels();
 
             // Convert list of pixels to matrix for quicker calculation.
-            let pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, width);
+            var pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, width);
 
             // Add border to matrix of pixels.
-            let pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, -1);
+            var pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, -1);
 
-            let i, color, x, y, dimensions, ne;
+            var i, color, x, y, dimensions, ne;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];

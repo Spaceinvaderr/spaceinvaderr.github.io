@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
 
-    let Operation = function (op, ctx) {
+    var Operation = function (op, ctx) {
         ctx = ctx || this;
 
         root.Status.wait();

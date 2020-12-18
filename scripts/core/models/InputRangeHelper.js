@@ -1,9 +1,9 @@
 (function (root) {
     'use strict';
 
-    let InputRangeHelper = {
+    var InputRangeHelper = {
         _triggerEvent: function (element, type) {
-            let evObj;
+            var evObj;
 
             if (element.fireEvent) {
                 element.fireEvent('on' + type);
@@ -16,8 +16,8 @@
 
         bindKeyShortcuts: function ($input) {
             $input.addEventListener('keydown', function (evt) {
-                let shortButton = root.Utilities.isDarwin() ? evt.metaKey : evt.ctrlKey;
-                let cacheValue = $input.value;
+                var shortButton = root.Utilities.isDarwin() ? evt.metaKey : evt.ctrlKey;
+                var cacheValue = $input.value;
 
                 if (shortButton) {
                     switch (evt.keyCode) {
