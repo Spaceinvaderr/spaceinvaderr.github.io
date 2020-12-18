@@ -1,15 +1,15 @@
 // dependencies
-const gulp = require('gulp');
-const markdownpdf = require('gulp-markdown-pdf');
-const rename = require("gulp-rename");
-const NwBuilder = require('node-webkit-builder');
-const browserify = require('gulp-browserify');
+let gulp = require('gulp');
+let markdownpdf = require('gulp-markdown-pdf');
+let rename = require("gulp-rename");
+let NwBuilder = require('node-webkit-builder');
+let browserify = require('gulp-browserify');
 
 
 // node.js modules
-const path = require('path');
-const del = require('del');
-const cjson = require('cjson');
+let path = require('path');
+let del = require('del');
+let cjson = require('cjson');
 
 // show simple help menu
 require('gulp-help')(gulp);

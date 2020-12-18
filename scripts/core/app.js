@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
 
-    const App = {
+    let App = {
         menu: null,
         windowManager: null
     };
