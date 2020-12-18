@@ -1,25 +1,25 @@
 (function (root) {
     'use strict';
 
-    var OperationsFlatteningHistogram = {
+    const OperationsFlatteningHistogram = {
 
         _flatteningHistogram: function (contextWindow, method) {
             _.assert(_.isNumber(method), 'OperationsFlatteningHistogram#_flatteningHistogram: `method` is not a number');
 
-            var z, r;
-            var can = contextWindow.settings.picture.canvas;
-            var ctx = can.ctx;
+            const z, r;
+            const can = contextWindow.settings.picture.canvas;
+            const ctx = can.ctx;
 
             // Stage 1 - Convert old level to new levels.
             // ------------------------------------------
 
-            var h = can.getCountingColorList();
-            var havg = ~~root.Utilities.average.apply(this, h);
-            var hint = 0;
+            const h = can.getCountingColorList();
+            const havg = ~~root.Utilities.average.apply(this, h);
+            const hint = 0;
 
-            var left = [];
-            var right = [];
-            var news = [];
+            const left = [];
+            const right = [];
+            const news = [];
 
             // 2 pkt.
             for (z = 0, r = 0; z < h.length; ++z) {
@@ -66,24 +66,24 @@
             // Stage 2 - Calculate new image.
             // ------------------------------
 
-            var pixelsChannels = can.getDataImage();
+            const pixelsChannels = can.getDataImage();
 
             // Reference to origin canvas.
-            var pixelsChannelsData = pixelsChannels.data;
+            const pixelsChannelsData = pixelsChannels.data;
 
             // Count a number of pixels multiply 4 channels.
-            var len = pixelsChannelsData.length;
+            const len = pixelsChannelsData.length;
 
             // Copy to array all channels. References was destroyed.
-            var pixelsArray = can.getOneChannelOfPixels();
+            const pixelsArray = can.getOneChannelOfPixels();
 
             // Convert list of pixels to matrix. Quicker calculation.
-            var pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, can.settings.width);
+            const pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, can.settings.width);
 
             // Add border to matrix of pixels.
-            var pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, -1);
+            const pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, -1);
 
-            var i, ne, avg, max, index, y, x, color, val;
+            const i, ne, avg, max, index, y, x, color, val;
 
             // 7 pkt.
             for (i = 0; i < len / 4; i++) {

@@ -1,4 +1,4 @@
-git {
+{
   "name": "spaceinvaderr.github.io",
   "version": "1.0.0",
   "description": "Aplikacja Internetowa dla przetwarzania obrazów",
@@ -6,7 +6,13 @@ git {
   "dependencies": {
     "requirejs": "^2.3.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-ejs": "^5.1.0",
+    "gulp-markdown-pdf": "^8.0.0",
+    "gulp-rename": "^2.0.0",
+    "node-webkit-builder": "^1.0.13"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

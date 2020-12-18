@@ -1,17 +1,17 @@
 (function (root) {
     'use strict';
 
-    var Colorize = function (contextWindow) {
-        var can = contextWindow.settings.picture.canvas;
-        var ctx = can.ctx;
+    const Colorize = function (contextWindow) {
+        const can = contextWindow.settings.picture.canvas;
+        const ctx = can.ctx;
 
-        var objectColors = ObjectsRecognitionWindow.prototype._useValleyMethod(contextWindow.settings.picture);
+        const objectColors = ObjectsRecognitionWindow.prototype._useValleyMethod(contextWindow.settings.picture);
 
-        var pixelsChannels = can.getDataImage();
-        var pixelsChannelsData = pixelsChannels.data;
-        var len = pixelsChannelsData.length;
+        const pixelsChannels = can.getDataImage();
+        const pixelsChannelsData = pixelsChannels.data;
+        const len = pixelsChannelsData.length;
 
-        var i, color, r, g, b;
+        const i, color, r, g, b;
 
         for (i = 0; i < len / 4; i++) {
             color = pixelsChannelsData[(i * 4)];

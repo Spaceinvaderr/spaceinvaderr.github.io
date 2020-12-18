@@ -2,11 +2,11 @@
     'use strict';
 
     // Aliases.
-    var doc = root.document;
+    const doc = root.document;
 
-    var $status;
+    const $status;
 
-    var Status = {
+    const Status = {
 
         init: function () {
             $status = doc.querySelector('#status');

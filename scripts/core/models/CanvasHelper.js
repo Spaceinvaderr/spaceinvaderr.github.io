@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
 
-    var CanvasHelper = {
+    const CanvasHelper = {
 
         /**
          * Wrap pixels with passed border.
@@ -13,9 +13,9 @@
          * @returns {Array}
          */
         completePixelList: function (pixels, width, height, border) {
-            var i;
-            var complement = [];
-            var k = width + 2;
+            const i;
+            const complement = [];
+            const k = width + 2;
 
             _.times(k, function () {
                 complement.push(border);
@@ -42,9 +42,9 @@
          * @returns {Array}
          */
         completePixelArray: function (pixels, border) {
-            var complement = [];
-            var k = pixels[0].length + 2;
-            var borderRow = [];
+            const complement = [];
+            const k = pixels[0].length + 2;
+            const borderRow = [];
 
             _.times(k, function () {
                 borderRow.push(border);
@@ -52,7 +52,7 @@
 
             complement.push(borderRow);
 
-            var i, row;
+            const i, row;
 
             for (i = 0; i < pixels.length; i++) {
                 row = [];
@@ -79,8 +79,8 @@
         toPixelMatrix: function (list, width) {
             _.assert(list.length % width === 0, 'CanvasHelper#toPixelMatrix: `passed` width is not divide a list without tail.');
 
-            var i, row;
-            var matrix = [];
+            const i, row;
+            const matrix = [];
 
             for (i = 0; i < list.length; i += width) {
                 row = list.slice(i, i + width);
@@ -100,10 +100,10 @@
          * @returns {Array}
          */
         getNeighbors: function (pixelsArray, x, y, figure) {
-            var point;
-            var neighbors = [];
-            var maxHeight = pixelsArray.length - 1;
-            var maxWidth = pixelsArray[0].length - 1;
+            const point;
+            const neighbors = [];
+            const maxHeight = pixelsArray.length - 1;
+            const maxWidth = pixelsArray[0].length - 1;
 
             figure = figure || 'square';
 
@@ -190,10 +190,10 @@
             _.assert(_.isNumber(i));
             _.assert(i < width * height);
 
-            var x = i % width;
+            const x = i % width;
             _.assert(x < width);
 
-            var y = parseInt(i / width, 10);
+            const y = parseInt(i / width, 10);
             _.assert(y < height);
 
             return {

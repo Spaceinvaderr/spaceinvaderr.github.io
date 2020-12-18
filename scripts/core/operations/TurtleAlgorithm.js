@@ -1,19 +1,19 @@
 (function (root) {
     'use strict';
 
-    var TurtleAlgorithm = function (contextWindow, params) {
-        var can = contextWindow.settings.picture.canvas;
-        var width = can.settings.width;
-        var height = can.settings.height;
+    const TurtleAlgorithm = function (contextWindow, params) {
+        const can = contextWindow.settings.picture.canvas;
+        const width = can.settings.width;
+        const height = can.settings.height;
 
-        var startX, startY;
-        var kier = 2;
-        var x = 0;
-        var y = 0;
-        var found = false;
-        var markColor = params.markColor;
+        const startX, startY;
+        const kier = 2;
+        const x = 0;
+        const y = 0;
+        const found = false;
+        const markColor = params.markColor;
 
-        var tab2 = [];
+        const tab2 = [];
         // Create two-dimension array.
         (function (w) {
             tab2 = new Array(w);
@@ -84,8 +84,8 @@
         // Alternative version of painting edge. Is too slow - disabled.
         /*
         (function () {
-            var w = width - 1;
-            var h = height - 1;
+            const w = width - 1;
+            const h = height - 1;
 
             function asyncPaint() {
                 setTimeout(function () {

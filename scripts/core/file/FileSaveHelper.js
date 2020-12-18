@@ -1,12 +1,12 @@
 (function (root) {
     'use strict';
 
-    var fs = require('fs');
+    const fs = require('fs');
 
     // Aliases.
-    var doc = root.document;
+    const doc = root.document;
 
-    var FileSaveHelper = function FileSaveHelper(params) {
+    const FileSaveHelper = function FileSaveHelper(params) {
         this.settings = {};
         _.extend(this.settings, params);
 
@@ -22,14 +22,14 @@
     FileSaveHelper.prototype.constructor = FileSaveHelper;
 
     FileSaveHelper.prototype.createInput = function () {
-        var self = this;
+        const self = this;
 
         this.$input = doc.createElement('input');
         this.$input.setAttribute('type', 'file');
         this.$input.setAttribute('nwsaveas', '');
         this.$input.classList.add('hide');
         this.$input.addEventListener('change', function () {
-            var files = [];
+            const files = [];
 
             _.each(self.$input.files, function (image) {
                 files.push({

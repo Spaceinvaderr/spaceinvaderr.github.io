@@ -1,18 +1,18 @@
 (function (root) {
     'use strict';
 
-    var OperationsOnePoint = {
+    const OperationsOnePoint = {
 
         // Operacje -> Jednopunktowe -> Odwrotność (negacja)
         onePointNegative: function (contextWindow) {
-            var can = contextWindow.settings.picture.canvas;
-            var ctx = can.ctx;
+            const can = contextWindow.settings.picture.canvas;
+            const ctx = can.ctx;
 
-            var pixelsChannels = can.getDataImage();
-            var pixelsChannelsData = pixelsChannels.data;
-            var len = pixelsChannelsData.length;
+            const pixelsChannels = can.getDataImage();
+            const pixelsChannelsData = pixelsChannels.data;
+            const len = pixelsChannelsData.length;
 
-            var i, color;
+            const i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -36,15 +36,15 @@
 
         // Operacje -> Jednopunktowe -> Progowanie
         onePointThreshold: function (contextWindow, params) {
-            var can = contextWindow.settings.picture.canvas;
-            var ctx = can.ctx;
+            const can = contextWindow.settings.picture.canvas;
+            const ctx = can.ctx;
 
-            var pixelsChannels = can.getDataImage();
-            var pixelsChannelsData = pixelsChannels.data;
-            var len = pixelsChannelsData.length;
-            var hold = parseInt(params.value, 10);
+            const pixelsChannels = can.getDataImage();
+            const pixelsChannelsData = pixelsChannels.data;
+            const len = pixelsChannelsData.length;
+            const hold = parseInt(params.value, 10);
 
-            var i, color;
+            const i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -65,32 +65,32 @@
 
         // Operacje -> Jednopunktowe -> Redukcja poziomów szarości
         onePointPosterize: function (contextWindow, params) {
-            var can = contextWindow.settings.picture.canvas;
-            var ctx = can.ctx;
+            const can = contextWindow.settings.picture.canvas;
+            const ctx = can.ctx;
 
-            var pixelsChannels = can.getDataImage();
-            var pixelsChannelsData = pixelsChannels.data;
-            var len = pixelsChannelsData.length;
-            var levels = parseInt(params.value, 10);
+            const pixelsChannels = can.getDataImage();
+            const pixelsChannelsData = pixelsChannels.data;
+            const len = pixelsChannelsData.length;
+            const levels = parseInt(params.value, 10);
 
-            var numOfAreas = 256 / levels;
-            var numOfValues = 255 / (levels - 1);
+            const numOfAreas = 256 / levels;
+            const numOfValues = 255 / (levels - 1);
 
-            var i, color;
+            const i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
 
                 // for more comments see http://www.axiomx.com/posterize.htm
-                var colorAreaFloat = color / numOfAreas;
-                var colorArea = parseInt(colorAreaFloat, 10);
+                const colorAreaFloat = color / numOfAreas;
+                const colorArea = parseInt(colorAreaFloat, 10);
 
                 if (colorArea > colorAreaFloat) {
                     colorArea = colorArea - 1;
                 }
 
-                var newColorFloat = numOfValues * colorArea;
-                var newColor = parseInt(newColorFloat, 10);
+                const newColorFloat = numOfValues * colorArea;
+                const newColor = parseInt(newColorFloat, 10);
 
                 if (newColor > newColorFloat) {
                     newColor = newColor - 1;
@@ -114,16 +114,16 @@
 
         // Operacje -> Jednopunktowe -> Rozciąganie
         onePointStretching: function (contextWindow, params) {
-            var can = contextWindow.settings.picture.canvas;
-            var ctx = can.ctx;
+            const can = contextWindow.settings.picture.canvas;
+            const ctx = can.ctx;
 
-            var pixelsChannels = can.getDataImage();
-            var pixelsChannelsData = pixelsChannels.data;
-            var len = pixelsChannelsData.length;
-            var min = parseInt(params.value.min, 10);
-            var max = parseInt(params.value.max, 10);
+            const pixelsChannels = can.getDataImage();
+            const pixelsChannelsData = pixelsChannels.data;
+            const len = pixelsChannelsData.length;
+            const min = parseInt(params.value.min, 10);
+            const max = parseInt(params.value.max, 10);
 
-            var i, color;
+            const i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -150,15 +150,15 @@
 
         // Operacje -> Jednopunktowe -> Regulacja jasnością
         onePointBrightnessRegulation: function (contextWindow, params) {
-            var can = contextWindow.settings.picture.canvas;
-            var ctx = can.ctx;
+            const can = contextWindow.settings.picture.canvas;
+            const ctx = can.ctx;
 
-            var pixelsChannels = can.getDataImage();
-            var pixelsChannelsData = pixelsChannels.data;
-            var len = pixelsChannelsData.length;
-            var hold = parseInt(params.value, 10);
+            const pixelsChannels = can.getDataImage();
+            const pixelsChannelsData = pixelsChannels.data;
+            const len = pixelsChannelsData.length;
+            const hold = parseInt(params.value, 10);
 
-            var i, color;
+            const i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -181,19 +181,19 @@
 
         // Operacje -> Jednopunktowe -> Regulacja kontrastem
         onePointContrastRegulation: function (contextWindow, params) {
-            var can = contextWindow.settings.picture.canvas;
-            var ctx = can.ctx;
+            const can = contextWindow.settings.picture.canvas;
+            const ctx = can.ctx;
 
-            var pixelsChannels = can.getDataImage();
-            var pixelsChannelsData = pixelsChannels.data;
-            var len = pixelsChannelsData.length;
-            var hold = parseInt(params.value, 10);
+            const pixelsChannels = can.getDataImage();
+            const pixelsChannelsData = pixelsChannels.data;
+            const len = pixelsChannelsData.length;
+            const hold = parseInt(params.value, 10);
 
-            var uniquePixelsChannels = can.getUniqueChannels();
-            var multiplier = (100.0 + hold) / 100.0;
-            var lmax = (uniquePixelsChannels.length - 1);
+            const uniquePixelsChannels = can.getUniqueChannels();
+            const multiplier = (100.0 + hold) / 100.0;
+            const lmax = (uniquePixelsChannels.length - 1);
 
-            var i, color, temp;
+            const i, color, temp;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -218,19 +218,19 @@
 
         // Operacje -> Jednopunktowe -> Regulacja korekcją gamma
         onePointGammaRegulation: function (contextWindow, params) {
-            var can = contextWindow.settings.picture.canvas;
-            var ctx = can.ctx;
+            const can = contextWindow.settings.picture.canvas;
+            const ctx = can.ctx;
 
-            var pixelsChannels = can.getDataImage();
-            var pixelsChannelsData = pixelsChannels.data;
-            var len = pixelsChannelsData.length;
-            var hold = parseInt(params.value, 10);
+            const pixelsChannels = can.getDataImage();
+            const pixelsChannelsData = pixelsChannels.data;
+            const len = pixelsChannelsData.length;
+            const hold = parseInt(params.value, 10);
 
-            var uniquePixelsChannels = can.getUniqueChannels();
-            var upo = new Array(uniquePixelsChannels.length);
-            var lmax = (uniquePixelsChannels.length - 1);
+            const uniquePixelsChannels = can.getUniqueChannels();
+            const upo = new Array(uniquePixelsChannels.length);
+            const lmax = (uniquePixelsChannels.length - 1);
 
-            var j, pos;
+            const j, pos;
 
             for (j = 0; j < uniquePixelsChannels.length; ++j) {
                 pos = (lmax * Math.pow(j / lmax, 1.0 / hold)) + 0.5;
@@ -238,7 +238,7 @@
                 upo[j] = pos;
             }
 
-            var i, color;
+            const i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -258,17 +258,17 @@
 
         // Operacje -> Jednopunktowe -> Arytmetyczne i Logiczne
         onePointArithmeticalLogical: function (contextWindow, params) {
-            var can = contextWindow.settings.picture.canvas;
-            var ctx = can.ctx;
+            const can = contextWindow.settings.picture.canvas;
+            const ctx = can.ctx;
 
-            var pixelsChannels = can.getDataImage();
-            var pixelsChannelsData = pixelsChannels.data;
-            var len = pixelsChannelsData.length;
+            const pixelsChannels = can.getDataImage();
+            const pixelsChannelsData = pixelsChannels.data;
+            const len = pixelsChannelsData.length;
 
-            var firstPicturePixels = params.firstPicture.canvas.getAllChannelsOfPixels();
-            var secondPicturePixels = params.secondPicture.canvas.getAllChannelsOfPixels();
+            const firstPicturePixels = params.firstPicture.canvas.getAllChannelsOfPixels();
+            const secondPicturePixels = params.secondPicture.canvas.getAllChannelsOfPixels();
 
-            var i, color, first, second;
+            const i, color, first, second;
 
             switch (params.operation) {
                 case 'add':
@@ -382,14 +382,14 @@
 
         // Okno -> UOP
         onePointUOP: function (contextWindow, params) {
-            var can = contextWindow.settings.picture.canvas;
-            var canCopy = params.copy.canvas;
+            const can = contextWindow.settings.picture.canvas;
+            const canCopy = params.copy.canvas;
 
-            var pixelsChannels = canCopy.getDataImage();
-            var pixelsChannelsData = pixelsChannels.data;
-            var len = pixelsChannelsData.length;
+            const pixelsChannels = canCopy.getDataImage();
+            const pixelsChannelsData = pixelsChannels.data;
+            const len = pixelsChannelsData.length;
 
-            var i, color;
+            const i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];

@@ -2,9 +2,9 @@
     'use strict';
 
     // Aliases.
-    var doc = root.document;
+    const doc = root.document;
 
-    var Canvas = function (params) {
+    const Canvas = function (params) {
         this.settings = {
             width: 100,
             height: 50
@@ -92,11 +92,11 @@
      * @access private
      */
     Canvas.prototype._convertToGrayScale = function () {
-        var pixelsChannels = this.getDataImage();
-        var pixelsChannelsData = pixelsChannels.data;
-        var len = pixelsChannelsData.length;
+        const pixelsChannels = this.getDataImage();
+        const pixelsChannelsData = pixelsChannels.data;
+        const len = pixelsChannelsData.length;
 
-        var i, color;
+        const i, color;
 
         for (i = 0; i < len / 4; i++) {
             color = pixelsChannelsData[(i * 4)];
@@ -134,10 +134,10 @@
      * @returns {Array}
      */
     Canvas.prototype.getOneChannelOfPixels = function () {
-        var pixelsLongArray = this.getAllChannelsOfPixels();
-        var pixelsArray = [];
+        const pixelsLongArray = this.getAllChannelsOfPixels();
+        const pixelsArray = [];
 
-        for (var i = 0; i < pixelsLongArray.length; i += 4) {
+        for (const i = 0; i < pixelsLongArray.length; i += 4) {
             pixelsArray[i / 4] = pixelsLongArray[i];
         }
 
@@ -151,7 +151,7 @@
      */
     Canvas.prototype.getUniqueChannels = function () {
         // Copy to array all channels. References was destroyed.
-        var pixelsArray = this.getOneChannelOfPixels();
+        const pixelsArray = this.getOneChannelOfPixels();
         // Remove duplicated colors. Sort result.
         return _.uniq(pixelsArray).sort(root.Utilities.sortNumbers);
     };
@@ -162,16 +162,16 @@
      * @returns {Array}
      */
     Canvas.prototype.getCountingColorList = function () {
-        var levels = 256;
+        const levels = 256;
 
         // Create list of all gray levels.
-        var hist = new Array(levels);
+        const hist = new Array(levels);
 
         // Set default to 0.
         while (levels--) hist[levels] = 0;
 
         // Copy to array all channels. References was destroyed.
-        var pixelsArray = this.getOneChannelOfPixels();
+        const pixelsArray = this.getOneChannelOfPixels();
 
         // Loop for each pixels.
         _.each(pixelsArray, function (color) {
@@ -195,7 +195,7 @@
      * @returns {Window.Canvas}
      */
     Canvas.prototype.copy = function () {
-        var canvas = new root.Canvas(this.settings);
+        const canvas = new root.Canvas(this.settings);
         canvas.$canvas.classList.add('canvas-picture');
         canvas.loadGrayScaleImage(this.$canvas, this.settings.width, this.settings.height);
         return canvas;
@@ -207,7 +207,7 @@
      * @returns {Image}
      */
     Canvas.prototype.toImage = function () {
-        var image = new Image();
+        const image = new Image();
         image.src = this.$canvas.toDataURL('image/png');
         return image;
     };
@@ -232,15 +232,15 @@
         _.assert(_.isNumber(x));
         _.assert(_.isNumber(y));
 
-        var pixelsChannels = this.getDataImage();
-        var pixelsChannelsData = pixelsChannels.data;
-        var width = this.settings.width;
-        var height = this.settings.height;
-        var i = root.CanvasHelper.convertXYToPositionIndex(width, height, x, y);
-        var r = pixelsChannelsData[(i * 4)];
-        var g = pixelsChannelsData[(i * 4) + 1];
-        var b = pixelsChannelsData[(i * 4) + 2];
-        var a = pixelsChannelsData[(i * 4) + 3];
+        const pixelsChannels = this.getDataImage();
+        const pixelsChannelsData = pixelsChannels.data;
+        const width = this.settings.width;
+        const height = this.settings.height;
+        const i = root.CanvasHelper.convertXYToPositionIndex(width, height, x, y);
+        const r = pixelsChannelsData[(i * 4)];
+        const g = pixelsChannelsData[(i * 4) + 1];
+        const b = pixelsChannelsData[(i * 4) + 2];
+        const a = pixelsChannelsData[(i * 4) + 3];
         return { r: r, g: g, b: b, a: a };
     };
 
@@ -257,11 +257,11 @@
         _.assert(_.isArray(color));
         _.assert(_.contains([3, 4], _.size(color)));
 
-        var pixelsChannels = this.getDataImage();
-        var pixelsChannelsData = pixelsChannels.data;
-        var width = this.settings.width;
-        var height = this.settings.height;
-        var i = root.CanvasHelper.convertXYToPositionIndex(width, height, x, y);
+        const pixelsChannels = this.getDataImage();
+        const pixelsChannelsData = pixelsChannels.data;
+        const width = this.settings.width;
+        const height = this.settings.height;
+        const i = root.CanvasHelper.convertXYToPositionIndex(width, height, x, y);
 
         pixelsChannelsData[(i * 4)] = color[0];
         pixelsChannelsData[(i * 4) + 1] = color[1];
@@ -282,13 +282,13 @@
     Canvas.prototype.each = function (handler) {
         _.assert(_.isFunction(handler));
 
-        var pixelsChannels = this.getDataImage();
-        var pixelsChannelsData = pixelsChannels.data;
-        var len = pixelsChannelsData.length;
-        var width = this.settings.width;
-        var height = this.settings.height;
+        const pixelsChannels = this.getDataImage();
+        const pixelsChannelsData = pixelsChannels.data;
+        const len = pixelsChannelsData.length;
+        const width = this.settings.width;
+        const height = this.settings.height;
 
-        var i, dimensions;
+        const i, dimensions;
 
         for (i = 0; i < len / 4; i++) {
             dimensions = root.CanvasHelper.convertPositionIndexToXY(width, height, i);
