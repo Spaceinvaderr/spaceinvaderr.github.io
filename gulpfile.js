@@ -16,8 +16,6 @@ let paths = {
     scripts: [path.join(__dirname, 'app', 'scripts', 'core', '**', '*js')]
 };
 
-// -----------------------------------------------------------------------------------------------------------------
-
 gulp.task('build', 'Building application for distribution.', function (cb) {
     let nw = new NwBuilder({
         files: [
@@ -40,7 +38,7 @@ gulp.task('build', 'Building application for distribution.', function (cb) {
 gulp.task('build:help', 'Building help.pdf from README.md.', function () {
     return gulp.src('README.md')
         .pipe(markdownpdf())
-        .pipe(rename('docs/help.pdf'))
+        //.pipe(rename('docs/help.pdf'))
         .pipe(gulp.dest('./app/'));
 });
 

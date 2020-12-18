@@ -13,6 +13,8 @@
         this.$placeHolder = doc.querySelector(root.WindowManager.RENDER_AREA_ID);
         this.$input = null;
 
+        
+
         this.initialize();
     };
 
