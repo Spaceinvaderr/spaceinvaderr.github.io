@@ -20,14 +20,14 @@
     FileOpenHelper.prototype.constructor = FileOpenHelper;
 
     FileOpenHelper.prototype.createInput = function () {
-        const self = this;
+        let self = this;
 
         this.$input = doc.createElement('input');
         this.$input.setAttribute('type', 'file');
         this.$input.setAttribute('multiple', 'multiple');
         this.$input.classList.add('hide');
         this.$input.addEventListener('change', function () {
-            const files = [];
+            let files = [];
 
             _.each(self.$input.files, function (image) {
                 files.push({

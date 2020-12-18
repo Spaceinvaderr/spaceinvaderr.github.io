@@ -12,7 +12,7 @@
             const pixelsChannelsData = pixelsChannels.data;
             const len = pixelsChannelsData.length;
 
-            const i, color;
+            let i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -44,7 +44,7 @@
             const len = pixelsChannelsData.length;
             const hold = parseInt(params.value, 10);
 
-            const i, color;
+            let i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -73,24 +73,24 @@
             const len = pixelsChannelsData.length;
             const levels = parseInt(params.value, 10);
 
-            const numOfAreas = 256 / levels;
-            const numOfValues = 255 / (levels - 1);
+            let numOfAreas = 256 / levels;
+            let numOfValues = 255 / (levels - 1);
 
-            const i, color;
+            let i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
 
                 // for more comments see http://www.axiomx.com/posterize.htm
-                const colorAreaFloat = color / numOfAreas;
-                const colorArea = parseInt(colorAreaFloat, 10);
+                let colorAreaFloat = color / numOfAreas;
+                let colorArea = parseInt(colorAreaFloat, 10);
 
                 if (colorArea > colorAreaFloat) {
                     colorArea = colorArea - 1;
                 }
 
-                const newColorFloat = numOfValues * colorArea;
-                const newColor = parseInt(newColorFloat, 10);
+                let newColorFloat = numOfValues * colorArea;
+                let newColor = parseInt(newColorFloat, 10);
 
                 if (newColor > newColorFloat) {
                     newColor = newColor - 1;
@@ -123,7 +123,7 @@
             const min = parseInt(params.value.min, 10);
             const max = parseInt(params.value.max, 10);
 
-            const i, color;
+            let i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -158,7 +158,7 @@
             const len = pixelsChannelsData.length;
             const hold = parseInt(params.value, 10);
 
-            const i, color;
+            let i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -193,7 +193,7 @@
             const multiplier = (100.0 + hold) / 100.0;
             const lmax = (uniquePixelsChannels.length - 1);
 
-            const i, color, temp;
+            let i, color, temp;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -226,11 +226,11 @@
             const len = pixelsChannelsData.length;
             const hold = parseInt(params.value, 10);
 
-            const uniquePixelsChannels = can.getUniqueChannels();
-            const upo = new Array(uniquePixelsChannels.length);
-            const lmax = (uniquePixelsChannels.length - 1);
+            let uniquePixelsChannels = can.getUniqueChannels();
+            let upo = new Array(uniquePixelsChannels.length);
+            let lmax = (uniquePixelsChannels.length - 1);
 
-            const j, pos;
+            let j, pos;
 
             for (j = 0; j < uniquePixelsChannels.length; ++j) {
                 pos = (lmax * Math.pow(j / lmax, 1.0 / hold)) + 0.5;
@@ -268,7 +268,7 @@
             const firstPicturePixels = params.firstPicture.canvas.getAllChannelsOfPixels();
             const secondPicturePixels = params.secondPicture.canvas.getAllChannelsOfPixels();
 
-            const i, color, first, second;
+            let i, color, first, second;
 
             switch (params.operation) {
                 case 'add':
@@ -389,7 +389,7 @@
             const pixelsChannelsData = pixelsChannels.data;
             const len = pixelsChannelsData.length;
 
-            const i, color;
+            let i, color;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];

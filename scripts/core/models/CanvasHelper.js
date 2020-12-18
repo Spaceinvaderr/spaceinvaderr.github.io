@@ -13,7 +13,7 @@
          * @returns {Array}
          */
         completePixelList: function (pixels, width, height, border) {
-            const i;
+            let i;
             const complement = [];
             const k = width + 2;
 
@@ -42,9 +42,9 @@
          * @returns {Array}
          */
         completePixelArray: function (pixels, border) {
-            const complement = [];
-            const k = pixels[0].length + 2;
-            const borderRow = [];
+            let complement = [];
+            let k = pixels[0].length + 2;
+            let borderRow = [];
 
             _.times(k, function () {
                 borderRow.push(border);
@@ -52,7 +52,7 @@
 
             complement.push(borderRow);
 
-            const i, row;
+            let i, row;
 
             for (i = 0; i < pixels.length; i++) {
                 row = [];
@@ -79,8 +79,8 @@
         toPixelMatrix: function (list, width) {
             _.assert(list.length % width === 0, 'CanvasHelper#toPixelMatrix: `passed` width is not divide a list without tail.');
 
-            const i, row;
-            const matrix = [];
+            let i, row;
+            let matrix = [];
 
             for (i = 0; i < list.length; i += width) {
                 row = list.slice(i, i + width);

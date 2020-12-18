@@ -11,7 +11,7 @@
         const pixelsChannelsData = pixelsChannels.data;
         const len = pixelsChannelsData.length;
 
-        const i, color, r, g, b;
+        let i, color, r, g, b;
 
         for (i = 0; i < len / 4; i++) {
             color = pixelsChannelsData[(i * 4)];

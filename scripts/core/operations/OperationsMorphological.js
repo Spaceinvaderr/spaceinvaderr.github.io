@@ -22,7 +22,7 @@
             // Add border to matrix of pixels.
             const pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, -1);
 
-            const i, color, x, y, dimensions, ne;
+            let i, color, x, y, dimensions, ne;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];
@@ -66,7 +66,7 @@
             // Add border to matrix of pixels.
             const pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, -1);
 
-            const i, color, x, y, dimensions, ne;
+            let i, color, x, y, dimensions, ne;
 
             for (i = 0; i < len / 4; i++) {
                 color = pixelsChannelsData[(i * 4)];

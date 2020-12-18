@@ -96,7 +96,7 @@
         const pixelsChannelsData = pixelsChannels.data;
         const len = pixelsChannelsData.length;
 
-        const i, color;
+        let i, color;
 
         for (i = 0; i < len / 4; i++) {
             color = pixelsChannelsData[(i * 4)];
@@ -137,7 +137,7 @@
         const pixelsLongArray = this.getAllChannelsOfPixels();
         const pixelsArray = [];
 
-        for (const i = 0; i < pixelsLongArray.length; i += 4) {
+        for (let i = 0; i < pixelsLongArray.length; i += 4) {
             pixelsArray[i / 4] = pixelsLongArray[i];
         }
 
@@ -165,7 +165,7 @@
         const levels = 256;
 
         // Create list of all gray levels.
-        const hist = new Array(levels);
+        let hist = new Array(levels);
 
         // Set default to 0.
         while (levels--) hist[levels] = 0;
@@ -195,7 +195,7 @@
      * @returns {Window.Canvas}
      */
     Canvas.prototype.copy = function () {
-        const canvas = new root.Canvas(this.settings);
+        let canvas = new root.Canvas(this.settings);
         canvas.$canvas.classList.add('canvas-picture');
         canvas.loadGrayScaleImage(this.$canvas, this.settings.width, this.settings.height);
         return canvas;
@@ -232,15 +232,15 @@
         _.assert(_.isNumber(x));
         _.assert(_.isNumber(y));
 
-        const pixelsChannels = this.getDataImage();
-        const pixelsChannelsData = pixelsChannels.data;
-        const width = this.settings.width;
-        const height = this.settings.height;
-        const i = root.CanvasHelper.convertXYToPositionIndex(width, height, x, y);
-        const r = pixelsChannelsData[(i * 4)];
-        const g = pixelsChannelsData[(i * 4) + 1];
-        const b = pixelsChannelsData[(i * 4) + 2];
-        const a = pixelsChannelsData[(i * 4) + 3];
+        let pixelsChannels = this.getDataImage();
+        let pixelsChannelsData = pixelsChannels.data;
+        let width = this.settings.width;
+        let height = this.settings.height;
+        let i = root.CanvasHelper.convertXYToPositionIndex(width, height, x, y);
+        let r = pixelsChannelsData[(i * 4)];
+        let g = pixelsChannelsData[(i * 4) + 1];
+        let b = pixelsChannelsData[(i * 4) + 2];
+        let a = pixelsChannelsData[(i * 4) + 3];
         return { r: r, g: g, b: b, a: a };
     };
 
@@ -257,11 +257,11 @@
         _.assert(_.isArray(color));
         _.assert(_.contains([3, 4], _.size(color)));
 
-        const pixelsChannels = this.getDataImage();
-        const pixelsChannelsData = pixelsChannels.data;
-        const width = this.settings.width;
-        const height = this.settings.height;
-        const i = root.CanvasHelper.convertXYToPositionIndex(width, height, x, y);
+        let pixelsChannels = this.getDataImage();
+        let pixelsChannelsData = pixelsChannels.data;
+        let width = this.settings.width;
+        let height = this.settings.height;
+        let i = root.CanvasHelper.convertXYToPositionIndex(width, height, x, y);
 
         pixelsChannelsData[(i * 4)] = color[0];
         pixelsChannelsData[(i * 4) + 1] = color[1];
@@ -288,7 +288,7 @@
         const width = this.settings.width;
         const height = this.settings.height;
 
-        const i, dimensions;
+        let i, dimensions;
 
         for (i = 0; i < len / 4; i++) {
             dimensions = root.CanvasHelper.convertPositionIndexToXY(width, height, i);

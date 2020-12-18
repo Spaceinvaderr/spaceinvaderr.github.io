@@ -25,10 +25,10 @@
             // Add border to matrix of pixels.
             const pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, 0);
 
-            const i, color, x, y, dimensions, ne;
+            let i, color, x, y, dimensions, ne;
 
             function calculateMask(ne) {
-                const temp = 0;
+                let temp = 0;
 
                 // Multiply mask with neighbours.
                 _.each(ne, function (n, index) {
@@ -91,7 +91,7 @@
                         }
                     }
 
-                    const difference = max - min;
+                    let difference = max - min;
 
                     for (i = 0; i < len / 4; i++) {
                         color = pixelsChannelsData[(i * 4)];
@@ -130,7 +130,7 @@
             // Convert list of pixels to matrix. Quicker calculation.
             const pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, can.settings.width);
 
-            const i = 0;
+            let i = 0;
 
             _.each(pixelsMatrix, function (row, y) {
                 _.each(row, function (color, x) {

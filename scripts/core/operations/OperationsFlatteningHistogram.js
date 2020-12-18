@@ -6,7 +6,7 @@
         _flatteningHistogram: function (contextWindow, method) {
             _.assert(_.isNumber(method), 'OperationsFlatteningHistogram#_flatteningHistogram: `method` is not a number');
 
-            const z, r;
+            let z, r;
             const can = contextWindow.settings.picture.canvas;
             const ctx = can.ctx;
 
@@ -17,9 +17,9 @@
             const havg = ~~root.Utilities.average.apply(this, h);
             const hint = 0;
 
-            const left = [];
-            const right = [];
-            const news = [];
+            let left = [];
+            let right = [];
+            let news = [];
 
             // 2 pkt.
             for (z = 0, r = 0; z < h.length; ++z) {
@@ -83,7 +83,7 @@
             // Add border to matrix of pixels.
             const pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, -1);
 
-            const i, ne, avg, max, index, y, x, color, val;
+            let i, ne, avg, max, index, y, x, color, val;
 
             // 7 pkt.
             for (i = 0; i < len / 4; i++) {

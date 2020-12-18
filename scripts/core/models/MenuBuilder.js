@@ -117,7 +117,7 @@
 
         // true - OK, false - ERROR
         function validateParams(params) {
-            const i, j, name, exp;
+            let i, j, name, exp;
             const supportedArray = [];
             const names = _.pluck(params, 'name');
             const supported = root.AssetsLoader.SUPPORTED_EXTENSIONS;
@@ -139,7 +139,7 @@
         }
 
         function buildCanvasFromImage(picture) {
-            const canvas = new root.Canvas({
+            let canvas = new root.Canvas({
                 width: picture.width,
                 height: picture.height
             });
@@ -149,7 +149,7 @@
         }
 
         function loadImages(params, callback) {
-            const picturesLoaders = [];
+            let picturesLoaders = [];
 
             // Loop through each of file (images).
             _.each(params, function (image, index) {

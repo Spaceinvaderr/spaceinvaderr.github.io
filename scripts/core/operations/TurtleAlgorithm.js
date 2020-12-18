@@ -6,14 +6,14 @@
         const width = can.settings.width;
         const height = can.settings.height;
 
-        const startX, startY;
-        const kier = 2;
-        const x = 0;
-        const y = 0;
-        const found = false;
-        const markColor = params.markColor;
+        let startX, startY;
+        let kier = 2;
+        let x = 0;
+        let y = 0;
+        let found = false;
+        let markColor = params.markColor;
 
-        const tab2 = [];
+        let tab2 = [];
         // Create two-dimension array.
         (function (w) {
             tab2 = new Array(w);
