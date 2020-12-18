@@ -10,14 +10,11 @@
   },
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-browserify": "^0.5.1",
     "gulp-ejs": "^5.1.0",
     "gulp-markdown-pdf": "^8.0.0",
     "gulp-rename": "^2.0.0",
     "node-webkit-builder": "^1.0.13",
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "webpack": "^5.11.0"
   },
   "repository": {
     "type": "git",
@@ -28,8 +25,5 @@
   "bugs": {
     "url": "https://github.com/Spaceinvaderr/spaceinvaderr.github.io/issues"
   },
-  "homepage": "https://github.com/Spaceinvaderr/spaceinvaderr.github.io#readme",
-  "browser": {
-    "fs": "level-fs"
-    }
+  "homepage": "https://github.com/Spaceinvaderr/spaceinvaderr.github.io#readme"
 }
