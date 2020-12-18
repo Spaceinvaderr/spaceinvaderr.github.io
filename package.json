@@ -1,0 +1,23 @@
+{
+  "name": "spaceinvaderr.github.io",
+  "version": "1.0.0",
+  "description": "Aplikacja Internetowa dla przetwarzania obrazów",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "requirejs": "^2.3.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spaceinvaderr/spaceinvaderr.github.io.git"
+  },
+  "author": "Margarita Chirillova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Spaceinvaderr/spaceinvaderr.github.io/issues"
+  },
+  "homepage": "https://github.com/Spaceinvaderr/spaceinvaderr.github.io#readme"
+}
