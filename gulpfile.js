@@ -1,7 +1,3 @@
-/*global require, __dirname, module */
-
-'use strict';
-
 // dependencies
 const gulp = require('gulp');
 const markdownpdf = require('gulp-markdown-pdf');
