@@ -30,7 +30,6 @@
   },
   "homepage": "https://github.com/Spaceinvaderr/spaceinvaderr.github.io#readme",
   "browser": {
-    "fs": "level-fs",
-    "path": "path"
+    "fs": "level-fs"
   }
 }
