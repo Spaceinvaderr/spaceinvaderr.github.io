@@ -38,8 +38,6 @@ gulp.task('build', 'Building application for distribution.', function (cb) {
         printReport(stats);
         callback();
     });
-});
-
     // nw.on('log', console.log);
 
     nw.build().then(function () {
