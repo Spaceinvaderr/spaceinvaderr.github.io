@@ -1,29 +1,29 @@
 (function (root) {
     'use strict';
 
-    const OperationsNeighbourhood = {
+    let OperationsNeighbourhood = {
         smoothing: function (contextWindow, params) {
-            const can = contextWindow.settings.picture.canvas;
-            const ctx = can.ctx;
-            const mask = params.mask;
-            const type = params.type;
-            const sum = root.Utilities.sum(mask) || 1;
-            const scale = params.scale;
-            const width = can.settings.width;
-            const height = can.settings.height;
+            let can = contextWindow.settings.picture.canvas;
+            let ctx = can.ctx;
+            let mask = params.mask;
+            let type = params.type;
+            let sum = root.Utilities.sum(mask) || 1;
+            let scale = params.scale;
+            let width = can.settings.width;
+            let height = can.settings.height;
 
-            const pixelsChannels = can.getDataImage();
-            const pixelsChannelsData = pixelsChannels.data;
-            const len = pixelsChannelsData.length;
+            let pixelsChannels = can.getDataImage();
+            let pixelsChannelsData = pixelsChannels.data;
+            let len = pixelsChannelsData.length;
 
             // Get only first channel per each pixel from image.
-            const pixelsArray = can.getOneChannelOfPixels();
+            let pixelsArray = can.getOneChannelOfPixels();
 
             // Convert list of pixels to matrix for quicker calculation.
-            const pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, width);
+            let pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, width);
 
             // Add border to matrix of pixels.
-            const pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, 0);
+            let pixelsWithBorder = root.CanvasHelper.completePixelArray(pixelsMatrix, 0);
 
             let i, color, x, y, dimensions, ne;
 
@@ -75,11 +75,11 @@
 
             // Support only 'Filtracja górnoprzepustowa'.
             if (type === 'fg') {
-                const uniquePixelsChannels = can.getUniqueChannels();
+                let uniquePixelsChannels = can.getUniqueChannels();
 
                 if (scale === 'proportion') {
-                    const min = _.first(uniquePixelsChannels);
-                    const max = _.last(uniquePixelsChannels);
+                    let min = _.first(uniquePixelsChannels);
+                    let max = _.last(uniquePixelsChannels);
 
                     for (i = 0; i < len / 4; i++) {
                         color = pixelsChannelsData[(i * 4)];
@@ -117,24 +117,24 @@
         },
 
         sharpen: function (contextWindow, params) {
-            const type = params.type;
-            const can = contextWindow.settings.picture.canvas;
-            const ctx = can.ctx;
+            let type = params.type;
+            let can = contextWindow.settings.picture.canvas;
+            let ctx = can.ctx;
 
-            const pixelsChannels = can.getDataImage();
-            const pixelsChannelsData = pixelsChannels.data;
+            let pixelsChannels = can.getDataImage();
+            let pixelsChannelsData = pixelsChannels.data;
 
             // Copy to array all channels. References was destroyed.
-            const pixelsArray = can.getOneChannelOfPixels();
+            let pixelsArray = can.getOneChannelOfPixels();
 
             // Convert list of pixels to matrix. Quicker calculation.
-            const pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, can.settings.width);
+            let pixelsMatrix = root.CanvasHelper.toPixelMatrix(pixelsArray, can.settings.width);
 
             let i = 0;
 
             _.each(pixelsMatrix, function (row, y) {
                 _.each(row, function (color, x) {
-                    const ne = root.CanvasHelper.getNeighbors(pixelsMatrix, x, y);
+                    let ne = root.CanvasHelper.getNeighbors(pixelsMatrix, x, y);
 
                     // Sorting for calculate median.
                     ne = ne.sort(root.Utilities.sortNumbers);
@@ -142,7 +142,7 @@
                     switch (type) {
                         case 'med':
                             // Calculate middle value.
-                            const mid = (ne.length - 1) / 2;
+                            let mid = (ne.length - 1) / 2;
 
                             // Update color.
                             if (ne.length % 2 === 1) {

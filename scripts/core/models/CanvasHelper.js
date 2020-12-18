@@ -14,8 +14,8 @@
          */
         completePixelList: function (pixels, width, height, border) {
             let i;
-            const complement = [];
-            const k = width + 2;
+            let complement = [];
+            let k = width + 2;
 
             _.times(k, function () {
                 complement.push(border);
@@ -100,10 +100,10 @@
          * @returns {Array}
          */
         getNeighbors: function (pixelsArray, x, y, figure) {
-            const point;
-            const neighbors = [];
-            const maxHeight = pixelsArray.length - 1;
-            const maxWidth = pixelsArray[0].length - 1;
+            let point;
+            let neighbors = [];
+            let maxHeight = pixelsArray.length - 1;
+            let maxWidth = pixelsArray[0].length - 1;
 
             figure = figure || 'square';
 

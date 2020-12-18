@@ -3,7 +3,7 @@
 
     const InputRangeHelper = {
         _triggerEvent: function (element, type) {
-            const evObj;
+            let evObj;
 
             if (element.fireEvent) {
                 element.fireEvent('on' + type);
@@ -16,8 +16,8 @@
 
         bindKeyShortcuts: function ($input) {
             $input.addEventListener('keydown', function (evt) {
-                const shortButton = root.Utilities.isDarwin() ? evt.metaKey : evt.ctrlKey;
-                const cacheValue = $input.value;
+                let shortButton = root.Utilities.isDarwin() ? evt.metaKey : evt.ctrlKey;
+                let cacheValue = $input.value;
 
                 if (shortButton) {
                     switch (evt.keyCode) {

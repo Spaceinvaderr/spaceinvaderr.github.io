@@ -10,10 +10,10 @@
         },
 
         max: function () {
-            const args = _.toArray(arguments);
+            let args = _.toArray(arguments);
 
             // Remove non-numbers elements, ex. all `undefined` values.
-            const numbers = _.filter(args, function (item) {
+            let numbers = _.filter(args, function (item) {
                 return !isNaN(item);
             });
 
@@ -22,15 +22,15 @@
         },
 
         average: function () {
-            const args = _.toArray(arguments);
+            let args = _.toArray(arguments);
 
             // Remove non-numbers elements, ex. all `undefined` values.
-            const numbers = _.filter(args, function (item) {
+            let numbers = _.filter(args, function (item) {
                 return !isNaN(item);
             });
 
             // Calculate summary of all numbers.
-            const sum = numbers.reduce(function (mem, item) {
+            let sum = numbers.reduce(function (mem, item) {
                 return mem + (item || 0);
             }, 0);
 
@@ -60,7 +60,7 @@
         },
 
         sortNumbers: function (a, b) {
-            const type = 0;
+            let type = 0;
 
             if (a > b) {
                 type = 1;

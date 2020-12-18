@@ -4,9 +4,9 @@
     // Aliases.
     const doc = root.document;
 
-    const $status;
+    let $status;
 
-    const Status = {
+    let Status = {
 
         init: function () {
             $status = doc.querySelector('#status');

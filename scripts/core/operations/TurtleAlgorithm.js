@@ -1,10 +1,10 @@
 (function (root) {
     'use strict';
 
-    const TurtleAlgorithm = function (contextWindow, params) {
-        const can = contextWindow.settings.picture.canvas;
-        const width = can.settings.width;
-        const height = can.settings.height;
+    let TurtleAlgorithm = function (contextWindow, params) {
+        let can = contextWindow.settings.picture.canvas;
+        let width = can.settings.width;
+        let height = can.settings.height;
 
         let startX, startY;
         let kier = 2;
@@ -84,8 +84,8 @@
         // Alternative version of painting edge. Is too slow - disabled.
         /*
         (function () {
-            const w = width - 1;
-            const h = height - 1;
+            let w = width - 1;
+            let h = height - 1;
 
             function asyncPaint() {
                 setTimeout(function () {

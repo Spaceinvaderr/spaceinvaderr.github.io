@@ -4,7 +4,7 @@
     // Aliases.
     const doc = root.document;
 
-    const FileOpenHelper = function FileOpenHelper(params) {
+    let FileOpenHelper = function FileOpenHelper(params) {
         this.settings = {
 
         };

@@ -2,14 +2,14 @@
     'use strict';
 
     const Colorize = function (contextWindow) {
-        const can = contextWindow.settings.picture.canvas;
-        const ctx = can.ctx;
+        let can = contextWindow.settings.picture.canvas;
+        let ctx = can.ctx;
 
-        const objectColors = ObjectsRecognitionWindow.prototype._useValleyMethod(contextWindow.settings.picture);
+        let objectColors = ObjectsRecognitionWindow.prototype._useValleyMethod(contextWindow.settings.picture);
 
-        const pixelsChannels = can.getDataImage();
-        const pixelsChannelsData = pixelsChannels.data;
-        const len = pixelsChannelsData.length;
+        let pixelsChannels = can.getDataImage();
+        let pixelsChannelsData = pixelsChannels.data;
+        let len = pixelsChannelsData.length;
 
         let i, color, r, g, b;
 

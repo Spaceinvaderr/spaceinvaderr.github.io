@@ -92,9 +92,9 @@
      * @access private
      */
     Canvas.prototype._convertToGrayScale = function () {
-        const pixelsChannels = this.getDataImage();
-        const pixelsChannelsData = pixelsChannels.data;
-        const len = pixelsChannelsData.length;
+        let pixelsChannels = this.getDataImage();
+        let pixelsChannelsData = pixelsChannels.data;
+        let len = pixelsChannelsData.length;
 
         let i, color;
 
@@ -134,8 +134,8 @@
      * @returns {Array}
      */
     Canvas.prototype.getOneChannelOfPixels = function () {
-        const pixelsLongArray = this.getAllChannelsOfPixels();
-        const pixelsArray = [];
+        let pixelsLongArray = this.getAllChannelsOfPixels();
+        let pixelsArray = [];
 
         for (let i = 0; i < pixelsLongArray.length; i += 4) {
             pixelsArray[i / 4] = pixelsLongArray[i];
@@ -151,7 +151,7 @@
      */
     Canvas.prototype.getUniqueChannels = function () {
         // Copy to array all channels. References was destroyed.
-        const pixelsArray = this.getOneChannelOfPixels();
+        let pixelsArray = this.getOneChannelOfPixels();
         // Remove duplicated colors. Sort result.
         return _.uniq(pixelsArray).sort(root.Utilities.sortNumbers);
     };
@@ -162,7 +162,7 @@
      * @returns {Array}
      */
     Canvas.prototype.getCountingColorList = function () {
-        const levels = 256;
+        let levels = 256;
 
         // Create list of all gray levels.
         let hist = new Array(levels);
@@ -171,7 +171,7 @@
         while (levels--) hist[levels] = 0;
 
         // Copy to array all channels. References was destroyed.
-        const pixelsArray = this.getOneChannelOfPixels();
+        let pixelsArray = this.getOneChannelOfPixels();
 
         // Loop for each pixels.
         _.each(pixelsArray, function (color) {
@@ -207,7 +207,7 @@
      * @returns {Image}
      */
     Canvas.prototype.toImage = function () {
-        const image = new Image();
+        let image = new Image();
         image.src = this.$canvas.toDataURL('image/png');
         return image;
     };
@@ -282,11 +282,11 @@
     Canvas.prototype.each = function (handler) {
         _.assert(_.isFunction(handler));
 
-        const pixelsChannels = this.getDataImage();
-        const pixelsChannelsData = pixelsChannels.data;
-        const len = pixelsChannelsData.length;
-        const width = this.settings.width;
-        const height = this.settings.height;
+        let pixelsChannels = this.getDataImage();
+        let pixelsChannelsData = pixelsChannels.data;
+        let len = pixelsChannelsData.length;
+        let width = this.settings.width;
+        let height = this.settings.height;
 
         let i, dimensions;
 
