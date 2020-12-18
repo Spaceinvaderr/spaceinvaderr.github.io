@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
 
-    const InputRangeHelper = {
+    let InputRangeHelper = {
         _triggerEvent: function (element, type) {
             let evObj;
 

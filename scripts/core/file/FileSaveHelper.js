@@ -1,12 +1,12 @@
 (function (root) {
     'use strict';
 
-    const fs = require('fs');
+    let fs = require('fs');
 
     // Aliases.
-    const doc = root.document;
+    let doc = root.document;
 
-    const FileSaveHelper = function FileSaveHelper(params) {
+    let FileSaveHelper = function FileSaveHelper(params) {
         this.settings = {};
         _.extend(this.settings, params);
 

@@ -3,9 +3,9 @@
 (function (root) {
     'use strict';
 
-    const shortcuts = new WeakMap();
+    let shortcuts = new WeakMap();
 
-    const KeyboardShortcut = {
+    let KeyboardShortcut = {
 
         handler: function (evt) {
             let shortcut = [];
@@ -29,7 +29,7 @@
             let char = String.fromCharCode(evt.keyCode);
             shortcut.push(char);
 
-            const definedShortcut = shortcuts[shortcut];
+            let definedShortcut = shortcuts[shortcut];
 
             if (definedShortcut) {
                 definedShortcut.call();

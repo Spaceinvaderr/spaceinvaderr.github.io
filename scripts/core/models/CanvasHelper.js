@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
 
-    const CanvasHelper = {
+    let CanvasHelper = {
 
         /**
          * Wrap pixels with passed border.
@@ -190,10 +190,10 @@
             _.assert(_.isNumber(i));
             _.assert(i < width * height);
 
-            const x = i % width;
+            let x = i % width;
             _.assert(x < width);
 
-            const y = parseInt(i / width, 10);
+            let y = parseInt(i / width, 10);
             _.assert(y < height);
 
             return {

@@ -3,7 +3,7 @@
 (function (root) {
     'use strict';
 
-    const Utilities = {
+    let Utilities = {
 
         isDarwin: function () {
             return process.platform === 'darwin';

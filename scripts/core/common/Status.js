@@ -2,7 +2,7 @@
     'use strict';
 
     // Aliases.
-    const doc = root.document;
+    let doc = root.document;
 
     let $status;
 

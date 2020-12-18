@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
 
-    const AssetsLoader = {
+    let AssetsLoader = {
         SUPPORTED_EXTENSIONS: [
             /.\.png/i,
             /.\.jpg/i,
