@@ -1,15 +1,17 @@
 // dependencies
-let gulp = require('gulp');
-let markdownpdf = require('gulp-markdown-pdf');
-let rename = require("gulp-rename");
-let NwBuilder = require('node-webkit-builder');
-let browserify = require('gulp-browserify');
+const webpack = require('webpack');
+const gulp = require('gulp');
+const markdownpdf = require('gulp-markdown-pdf');
+const rename = require("gulp-rename");
+const NwBuilder = require('node-webkit-builder');
+const browserify = require('gulp-browserify');
 
 
 // node.js modules
-let path = require('path');
-let del = require('del');
-let cjson = require('cjson');
+const path = require('path');
+const del = require('del');
+const cjson = require('cjson');
+const { stat } = require('fs');
 
 // show simple help menu
 require('gulp-help')(gulp);
@@ -47,3 +49,15 @@ gulp.task('build:help', 'Building help.pdf from README.md.', function () {
         .pipe(gulp.dest('./app/'));
 });
 
+webpack({
+    mode: 'development',
+    entry: './scripts/core/app.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'app.bundle.js'
+  }
+  }, (err, stats) => { // [Stats Object](#stats-object)
+    if (err || stats.hasErrors()) {
+        console.log(err || stats.hasErrors());
+    }
+  });
