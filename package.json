@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/Spaceinvaderr/spaceinvaderr.github.io/issues"
   },
-  "homepage": "https://github.com/Spaceinvaderr/spaceinvaderr.github.io#readme"
+  "homepage": "https://github.com/Spaceinvaderr/spaceinvaderr.github.io#readme",
+  "browser": {
+    "fs": "level-fs"
+  }
 }
