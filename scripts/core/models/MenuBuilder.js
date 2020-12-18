@@ -3,8 +3,8 @@
 (function (root) {
     'use strict';
 
-    let path = require('path');
-    let gui = require('nw.gui');
+    const path = require('path');
+    const gui = require('nw.gui');
 
     function MenuBuilder() {
         this.windowMenu = null;

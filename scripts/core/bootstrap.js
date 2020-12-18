@@ -1,7 +1,7 @@
 (function (root) {
     'use strict';
 
-    var Bootstrap = {
+    const Bootstrap = {
         setup: function () {
             var menu = root.App.menu = new root.MenuBuilder();
             var wm = root.App.windowManager = new root.WindowManager();
@@ -121,7 +121,7 @@
                 wm.closeWindow(params.win);
 
                 // Activate last added window.
-                var lastAddedWindow = wm.getLast();
+                let lastAddedWindow = wm.getLast();
 
                 if (lastAddedWindow !== null) {
                     wm.emit(root.AbstractWindow.EVENTS.ACTIVE_WINDOW, { win: lastAddedWindow });
