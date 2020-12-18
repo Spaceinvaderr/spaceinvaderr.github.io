@@ -42,5 +42,5 @@ gulp.task('build:help', 'Building help.pdf from README.md.', function () {
     return gulp.src('README.md')
         .pipe(markdownpdf())
         //.pipe(rename('docs/help.pdf'))
-        .pipe(gulp.dest('./app/'));
+        .pipe(gulp.dest('./src/core/app/'));
 });
