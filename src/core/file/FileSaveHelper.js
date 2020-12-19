@@ -1,8 +1,6 @@
 (function (root) {
     'use strict';
 
-    var fs = require('fs');
-
     // Aliases.
     var doc = root.document;
 
@@ -42,7 +40,8 @@
     };
 
     FileSaveHelper.prototype.saveCanvas = function (name, canvas) {
-        fs.writeFileSync(name, canvas.toBuffer());
+        //fs.writeFileSync(name, canvas.toBuffer());
+        console.log(canvas);
     };
 
     // Exports `FileSaveHelper`.
