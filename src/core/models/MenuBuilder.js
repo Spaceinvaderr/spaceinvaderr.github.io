@@ -3,7 +3,7 @@
 (function (root) {
     'use strict';
 
-    var path = require('path');
+    //var path = require('path');
     var gui = require('nw.gui');
 
     function MenuBuilder() {
@@ -692,7 +692,7 @@
         this.addSeparator(helpMenu);
 
         this.aboutHelpMenuItem = this.addMenuItem(root.Locale.get('ABOUT_HELP'), function () {
-            var pdf = path.resolve('app', 'docs', '');
+            //var pdf = path.resolve('app', 'docs', '');
             gui.Shell.openItem(pdf);
         }, 'Ctrl-Shift', 'P');
         helpMenu.append(this.aboutHelpMenuItem);
