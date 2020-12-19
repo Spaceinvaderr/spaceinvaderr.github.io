@@ -4,7 +4,7 @@
     'use strict';
 
     //var path = require('path');
-    var gui = require('nw.gui');
+    //var gui = require('nw.gui');
 
     function MenuBuilder() {
         this.windowMenu = null;
